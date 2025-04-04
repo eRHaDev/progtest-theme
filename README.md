@@ -8,6 +8,19 @@
 
 **ProgTest Themes** is a WebExtension for Google Chrome and Mozilla Firefox which works as a theme manager for [ProgTest](https://progtest.fit.cvut.cz). It adds other useful features, such as syntax highlighting or notifications.
 
+## Project Status
+This is a college student project. 
+
+I am very grateful for every pull request that happens here. It makes the FIT life that much better.
+
+Thank you. ♥️
+
+Unfortunately, both me, the original author, as well as the maintainers that have come after me have had their personal goals change in a very short span of time. This project is something you focus on only during your study years and is very hard to keep updated once you finish school.
+
+If you, the user, a bug fixer, or even better, an innovator want to help maintain this project, send me an email or open an issue.
+
+After all, there is no limit to the number of managers in the Chrome WebStore and every helpful hand is more than welcome!
+
 ## Download
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/progtest-themes/eoofjghfpdplnjhbfflfnfogdjnedgjf) (supports any Chromium browser, e.g. Opera, Brave, new Microsoft Edge, etc.)
