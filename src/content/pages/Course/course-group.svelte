@@ -6,7 +6,7 @@
     export let onTaskClick: (event: MouseEvent, entry: CourseItem) => boolean;
 
     const itemsByType = Object.entries(
-        group.taskGrp.reduce(
+        group.tasks.reduce(
             (acc, curr) => {
                 if (acc[curr.type] === undefined) {
                     acc[curr.type] = [];
@@ -31,7 +31,7 @@
     };
 </script>
 
-{#if group.taskGrp.length > 0}
+{#if group.tasks.length > 0}
     <div class="course_grp">
         <span class="course_title">{group.name}</span>
         {#each itemsByType as [_type, items]}
@@ -41,7 +41,7 @@
                     class={cx("course_link", `course_link_type_${entry.type}`, {
                         course_disabled: entry.disabled,
                         course_deadline_today:
-                            isToday(entry.closes) && entry.score === 0,
+                            entry.closes && isToday(entry.closes) && entry.score === 0,
                     })}
                     on:click={(event) => onEntryClick(event, entry)}
                 >
@@ -55,7 +55,7 @@
                     {/if}
                     {#if entry.opens}
                         <span class="course_link_deadline"
-                            >{entry.opens.toLocaleDateString("cs-CZ")}</span
+                            >Otevírá se: {entry.opens.toLocaleDateString("cs-CZ")}</span
                         >
                         <br />
                     {/if}

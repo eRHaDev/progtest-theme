@@ -69,7 +69,7 @@
                         </span>
                         {#if data.info.lateDeadline}
                             <span class="modal-deadline-late">
-                                {data.info.lateDeadline.toLocaleString("cs-CZ")}
+                                {data.info.lateDeadline.toLocaleString("cs-CZ") + " " + (data.info.lateDeadlineInfo ?? "")}
                             </span>
                         {/if}
                     </div>
@@ -263,8 +263,8 @@
 
     .modal-deadline-late {
         font-size: 11pt;
-        margin-left: 5pt;
         font-weight: 100;
+        display: block;
     }
 
     .modal-line {
