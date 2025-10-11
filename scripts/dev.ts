@@ -44,8 +44,6 @@ build({ verbose: false, clean: true })
             await additionalDevSteps();
             reloader.reload({
                 extension_id: process.env.EXTENSION_ID,
-                delay_after_tab_reload: 0,
-                delay_after_extension_reload: 0,
             });
 
             console.log("Extension rebuilt");

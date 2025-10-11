@@ -12,7 +12,7 @@ export class Exam extends Logged {
         // normalize html
         document
             .querySelectorAll(
-                'form[name="form1"] table tr:nth-child(n+4) td.rCell, form[name="form1"] table tr:nth-child(n+4) td.rbCell',
+                'form[name="form1"] table tr:nth-child(n+4) td.rCell, form[name="form1"] table tr:nth-child(n+4) td:nth-child(2)',
             )
             .forEach((e) => {
                 const radio = e.querySelector('input[type="radio"]');

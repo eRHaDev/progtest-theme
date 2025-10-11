@@ -3,13 +3,15 @@
     import { fade } from "svelte/transition";
     import { pttLoadedEvent } from "../events";
 
-    let isVisible = true;
+    let isVisible = false;
 
     function showLoader() {
+        console.log("showLoader");
         isVisible = true;
     }
 
     function hideLoader() {
+        console.log("hideLoader");
         isVisible = false;
     }
 
