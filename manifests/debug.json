@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "run_at": "document_start",
-      "js": ["content/start.js", "content/highlightjs/highlight.min.js"],
+      "js": ["content/start.js", "external/highlight.min.js"],
       "css": ["themes/loading/on.css"],
       "matches": [
         "https://progtest.fit.cvut.cz/*",

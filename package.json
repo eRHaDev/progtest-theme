@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/keombre/progtest-theme",
   "devDependencies": {
+    "@highlightjs/cdn-assets": "^11.11.1",
     "@types/archiver": "^5.3.4",
     "@types/chrome": "^0.0.248",
     "@types/minimist": "^1.2.4",

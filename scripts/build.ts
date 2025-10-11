@@ -1,5 +1,5 @@
 import { BUILD_DIR, ENTRYPOINTS, SRC_DIR } from "./constants";
-import { mkdir, rm, cp } from "fs/promises";
+import { cp, mkdir, rm } from "fs/promises";
 import { copyDirectory } from "./utils";
 import { sveltePlugin } from "./sveltePlugin";
 
@@ -31,26 +31,20 @@ export async function build(options: { verbose: boolean; clean: boolean }) {
     console.log("Copying other files");
     await copyDirectory(SRC_DIR, BUILD_DIR, {
         filter: (path) => {
-            if (path.endsWith("highlight.min.js")) {
-                return true;
-            }
-            if (
+            return !(
                 path.endsWith(".js") ||
                 path.endsWith(".ts") ||
                 path.endsWith(".svelte")
-            ) {
-                return false;
-            }
-            return true;
+            );
         },
         verbose: options.verbose,
     });
-    await cp(
-        `./node_modules/normalize.css/normalize.css`,
-        `${BUILD_DIR}/external/normalize.css`,
-    );
-    await cp(
-        `./node_modules/iconify-icon/dist/iconify-icon.min.js`,
-        `${BUILD_DIR}/external/iconify-icon.min.js`,
-    );
+
+    for (const path of [
+        "./node_modules/normalize.css/normalize.css",
+        "./node_modules/iconify-icon/dist/iconify-icon.min.js",
+        "./node_modules/@highlightjs/cdn-assets/highlight.min.js",
+    ]) {
+        await cp(path, `${BUILD_DIR}/external/${path.split("/").pop()}`);
+    }
 }
