@@ -15,8 +15,6 @@ I am very grateful for every pull request that happens here. It makes the FIT li
 
 Thank you. ♥️
 
-Unfortunately, both me, the original author, as well as the maintainers that have come after me have had their personal goals change in a very short span of time. This project is something you focus on only during your study years and is very hard to keep updated once you finish school.
-
 If you, the user, a bug fixer, or even better, an innovator want to help maintain this project, send me an email or open an issue.
 
 After all, there is no limit to the number of managers in the Chrome WebStore and every helpful hand is more than welcome!
