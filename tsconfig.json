@@ -1,7 +1,7 @@
 {
     "exclude": ["./build", "./node_modules"],
     "compilerOptions": {
-        "typeRoots": ["@types"],
+        "typeRoots": ["./node_modules/@types", "./@types"],
 
         // enable latest features
         "lib": ["DOM", "ESNext"],

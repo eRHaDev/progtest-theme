@@ -1,4 +1,4 @@
-import { ExtensionSettings } from "../../settings";
+import type { ExtensionSettings } from "../../settings.ts";
 
 import { Logged } from "./Logged";
 

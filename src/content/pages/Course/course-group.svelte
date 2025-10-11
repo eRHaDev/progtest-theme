@@ -104,6 +104,8 @@
         padding: 6px 0 6px 6px;
         border-left: 3px solid transparent;
         font-weight: 500;
+
+        transition: background-color 0.3s ease;
     }
 
     span.course_link_score_sum:before {
@@ -207,10 +209,18 @@
     }
 
     .course_deadline_today {
-        background-color: #ffc107 !important;
+        background-color: rgba(255, 0, 0, 0.25) !important;
     }
 
     .course_deadline_today:hover {
-        background-color: #ffb300 !important;
+        background-color: rgba(255, 0, 0, 0.3) !important;
+    }
+
+    .course_finished {
+        background-color: rgba(0, 255, 0, 0.1) !important;
+    }
+
+    .course_finished:hover {
+        background-color: rgba(0, 255, 0, 0.15) !important;
     }
 </style>

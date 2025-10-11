@@ -1,5 +1,5 @@
 import { MessageType } from "../messages";
-import { ExtensionSettings } from "../settings";
+import type { ExtensionSettings } from "../settings";
 
 const setTitle = () => {
     document.title = document.title

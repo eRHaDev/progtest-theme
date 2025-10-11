@@ -1,4 +1,4 @@
-import { Page } from "../Page";
+import type { Page } from "../Page";
 
 import ErrorComponent from "./Error.svelte";
 

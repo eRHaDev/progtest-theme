@@ -1,6 +1,6 @@
 import { pttLoadedEvent } from "../events";
 import { MessageType } from "../messages";
-import { ExtensionSettings } from "../settings";
+import type { ExtensionSettings } from "../settings";
 
 import { Course } from "./pages/Course/Course";
 import { ErrorPage } from "./pages/Error/Error";
@@ -8,7 +8,7 @@ import { Exam } from "./pages/Exam";
 import { Logged } from "./pages/Logged";
 import { Login } from "./pages/Login";
 import { Main } from "./pages/Main/Main";
-import { Page } from "./pages/Page";
+import type { Page } from "./pages/Page";
 import { Results } from "./pages/Results";
 import { Task } from "./pages/Task";
 

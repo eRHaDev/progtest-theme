@@ -1,6 +1,6 @@
-import { ExtensionSettings } from "../../settings";
+import type { ExtensionSettings } from "../../settings";
 
-import { Page } from "./Page";
+import type { Page } from "./Page";
 
 interface LoggedTask {
     subject: string;
