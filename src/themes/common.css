@@ -60,7 +60,7 @@ tr {
     font-size: 12px;
 }
 
-select.std.w200[name="UID_UNIVERSITY"] {
+select[name="UID_UNIVERSITY"] {
     width: -webkit-fill-available;
 }
 
@@ -79,7 +79,7 @@ select.std.w200[name="UID_UNIVERSITY"] {
     font-weight: 500;
 }
 
-.loginForm > center > div > div > table:before {
+.loginForm > center > div > table:before {
     content: "";
     width: 260px;
     height: 90%;

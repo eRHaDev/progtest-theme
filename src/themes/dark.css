@@ -60,7 +60,7 @@ select > option {
     color: #f5f5f5;
 }
 
-.loginForm > center > div > div > table:before {
+.loginForm > center > div > table:before {
     background: #263238;
 }
 
@@ -86,8 +86,7 @@ select > option {
     fill: #d1d1d1;
 }
 
-.loginForm #ldap2 > td:nth-child(1) > b,
-.loginForm #ldap1 > td:nth-child(1) > b {
+.loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b {
     color: #cdcdcd;
     background: #252525;
 }

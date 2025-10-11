@@ -21,7 +21,7 @@ export class Login implements Page {
 
             document
                 .querySelector(
-                    "select.std.fw[name=UID_UNIVERSITY]",
+                    "select[name=UID_UNIVERSITY]",
                 )
                 ?.childNodes.forEach((e) => {
                     if (!(e instanceof HTMLOptionElement)) return;
@@ -52,7 +52,10 @@ export class Login implements Page {
             inputs[0].addEventListener("focusout", loginFocusOut);
             inputs[1].addEventListener("focusout", loginFocusOut);
 
-            document.getElementsByName("lang")[0].outerHTML += this.langGlobe;
+            const langElement = document.getElementsByName("lang")[0];
+            uniselect.insertBefore(langElement, uniselect.firstChild);
+            langElement.outerHTML += this.langGlobe;
+            langElement.classList.remove("fw");
 
             // in firefox, when opening the page, load the selected login type
             // @ts-expect-error browser is only defined in Chrome and thus is not in types as a global variable
