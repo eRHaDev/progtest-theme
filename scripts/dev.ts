@@ -1,3 +1,5 @@
+import Reloader from "advanced-extension-reloader-watch-2/es/reloader";
+
 import { watch } from "fs";
 import { cp } from "fs/promises";
 import { build } from "./build";
@@ -18,18 +20,28 @@ build({ verbose: false, clean: true })
             process.exit(0);
         };
 
+        const reloader = new Reloader({
+            port: 7220,
+        });
+
         const onChange = async (eventType: string, filename: string | null) => {
             if (!watchedExtensions.some((ext) => filename?.endsWith(ext))) {
                 console.log(`Ignoring change in ${filename}`);
                 return;
             }
             if (eventType === "error") {
-                console.error(`Error occurred with ${filename}, exiting...`);
-                exit();
+                console.error(`Error occurred with ${filename}`);
+                return;
             }
             console.log(`${eventType} detected in ${filename}, rebuilding...`);
             await build({ verbose: false, clean: false });
             await additionalDevSteps();
+            reloader.reload({
+                extension_id: process.env.EXTENSION_ID,
+                delay_after_tab_reload: 0,
+                delay_after_extension_reload: 0,
+            });
+
             console.log("Extension rebuilt");
         };
 

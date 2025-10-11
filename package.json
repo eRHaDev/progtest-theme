@@ -30,6 +30,7 @@
     "@types/web": "^0.0.117",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
+    "advanced-extension-reloader-watch-2": "^2.1.0",
     "archiver": "^6.0.1",
     "bun-types": "^1.0.6",
     "eslint": "^8.51.0",
