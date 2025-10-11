@@ -72,8 +72,8 @@ select > option {
     background: #252525;
 }
 
-.loginForm div.outButton.w120 input,
-.loginForm a.butLink {
+.loginForm div.bUpd input,
+.loginForm div.bLink a {
     outline-color: #b2dfdb;
 }
 
@@ -91,7 +91,7 @@ select > option {
     background: #252525;
 }
 
-.loginForm input.std.w200 {
+.loginForm :is(#ldap1, #ldap2, #ldap3) input {
     border-bottom: thin solid rgba(255, 255, 255, 0.3);
 }
 

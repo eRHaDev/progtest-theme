@@ -34,7 +34,13 @@ build({ verbose: false, clean: true })
                 return;
             }
             console.log(`${eventType} detected in ${filename}, rebuilding...`);
-            await build({ verbose: false, clean: false });
+            try {
+                await build({ verbose: false, clean: false });
+            } catch (e) {
+                console.error("Build failed, not reloading extension");
+                console.error(e);
+                return;
+            }
             await additionalDevSteps();
             reloader.reload({
                 extension_id: process.env.EXTENSION_ID,

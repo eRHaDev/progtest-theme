@@ -138,8 +138,8 @@ select[name="UID_UNIVERSITY"] {
     top: 160px;
 }
 
-.loginForm div.outButton.w120 input,
-.loginForm a.butLink {
+.loginForm div.bUpd input,
+.loginForm div.bLink a {
     position: absolute;
     width: 120px;
     color: #fff;
@@ -155,13 +155,13 @@ select[name="UID_UNIVERSITY"] {
     background-color: #009688;
 }
 
-.loginForm a.butLink:focus {
+.loginForm div.bLink a:focus {
     outline-offset: 0;
     outline-style: initial;
     outline-width: 4.8px;
 }
 
-.loginForm td:nth-child(2) > div.outButton.w120 input {
+.loginForm td:nth-child(2) > div.bUpd input {
     bottom: 25px;
     font-size: 10pt;
     width: 100px;
@@ -169,17 +169,17 @@ select[name="UID_UNIVERSITY"] {
     padding: 7px 0;
 }
 
-.loginForm div.outButton.w120 input:hover,
-.loginForm a.butLink:hover {
+.loginForm div.bUpd input:hover,
+.loginForm div.bLink a:hover {
     background: #26a69a;
 }
 
-.loginForm div.outButton.w120 input:active,
-.loginForm a.butLink:active {
+.loginForm div.bUpd input:active,
+.loginForm div.bLink a:active {
     background: #00796b;
 }
 
-.loginForm .outBox > table {
+.loginForm .insBox > table {
     padding: 25px;
     text-align: center;
 }
@@ -197,8 +197,8 @@ select[name="UID_UNIVERSITY"] {
 
 #langGlobe {
     position: absolute;
-    top: 9px;
-    right: 28px;
+    bottom: 2px;
+    right: 15px;
     z-index: -1;
 }
 
@@ -207,20 +207,37 @@ select[name="UID_UNIVERSITY"] {
     font-size: 12pt;
 }
 
-.loginForm #ldap2 > td:nth-child(1) > b,
-.loginForm #ldap1 > td:nth-child(1) > b {
+.loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b {
     font-weight: 100;
     position: absolute;
     left: 50px;
     font-size: 16pt;
     cursor: pointer;
-    z-index: 2;
     width: 250px;
     text-align: left;
     transition:
         font-size 0.2s ease,
         top 0.2s ease;
-    padding: 1px 0;
+}
+
+.loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b[moved] {
+    font-size: 10pt;
+    cursor: default;
+    background: transparent;
+    border: none;
+}
+
+.loginForm :is(#ldap1, #ldap2, #ldap3) input {
+    border: 0;
+    outline: none;
+    font-size: 16pt;
+    position: absolute;
+    left: 50px;
+    width: 250px;
+    background: transparent !important;
+    font-weight: 400 !important;
+    padding: 3px 0 !important;
+    min-width: 250px !important;
 }
 
 .loginForm #ldap1 > td:nth-child(1) > b {
@@ -229,10 +246,10 @@ select[name="UID_UNIVERSITY"] {
 
 .loginForm #ldap1 > td:nth-child(1) > b[moved] {
     top: 50px;
-    font-size: 10pt;
-    cursor: default;
-    background: transparent;
-    border: none;
+}
+
+.loginForm #ldap1 input {
+    top: 70px;
 }
 
 .loginForm #ldap2 > td:nth-child(1) > b {
@@ -241,40 +258,31 @@ select[name="UID_UNIVERSITY"] {
 
 .loginForm #ldap2 > td:nth-child(1) > b[moved] {
     top: 110px;
-    font-size: 10pt;
-    cursor: default;
-    background: transparent;
-    border: none;
 }
 
-.loginForm input.std.w200 {
-    border: none;
-    outline: none;
-    font-size: 16pt;
-    position: absolute;
-    left: 50px;
-    width: 250px;
-    background: transparent !important;
-    font-weight: 400 !important;
-    padding: 1px 0 !important;
-    min-width: 250px !important;
-}
-
-.loginForm #ldap1 > td:nth-child(2) > input {
-    top: 70px;
-}
-
-.loginForm #ldap2 > td:nth-child(2) > input {
+.loginForm #ldap2 input {
     top: 130px;
 }
 
-.loginForm .outBox > table > tbody > tr:nth-child(1) {
-    position: absolute;
-    left: -115px;
-    top: 25px;
+.loginForm #ldap3 > td:nth-child(1) > b {
+    top: 190px;
 }
 
-.loginForm .outBox > table > tbody > tr:nth-child(2) {
+.loginForm #ldap3 > td:nth-child(1) > b[moved] {
+    top: 170px;
+}
+
+.loginForm #ldap3 input {
+    top: 190px;
+}
+
+.loginForm .insBox > table > tbody > tr:nth-child(1) {
+    position: absolute;
+    left: -100px;
+    top: 40px;
+}
+
+.loginForm .insBox > table > tbody > tr:nth-child(2) {
     display: none;
 }
 

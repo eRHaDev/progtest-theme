@@ -48,8 +48,8 @@ select {
     background: #fff;
 }
 
-.loginForm div.outButton.w120 input,
-.loginForm a.butLink {
+.loginForm div.bUpd input,
+.loginForm div.bLink a {
     outline-color: #004d40;
 }
 
@@ -67,7 +67,7 @@ select {
     background: #fff;
 }
 
-.loginForm input.std.w200 {
+.loginForm input {
     border-bottom: thin solid rgba(0, 0, 0, 0.3);
 }
 

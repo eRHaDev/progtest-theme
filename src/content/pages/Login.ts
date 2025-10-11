@@ -20,9 +20,7 @@ export class Login implements Page {
             uniselect.id = "uniSel";
 
             document
-                .querySelector(
-                    "select[name=UID_UNIVERSITY]",
-                )
+                .querySelector("select[name=UID_UNIVERSITY]")
                 ?.childNodes.forEach((e) => {
                     if (!(e instanceof HTMLOptionElement)) return;
                     const uni = document.createElement("div");
@@ -39,23 +37,28 @@ export class Login implements Page {
 
             // add title mover
             document
-                .querySelector<HTMLElement>("#ldap1 > td.ltCell.al > b")
-                ?.addEventListener("click", moveInputLabel);
+                .querySelectorAll(
+                    ".loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b",
+                )
+                .forEach((e: Element) => {
+                    if (!(e instanceof HTMLElement)) return;
+
+                    e.addEventListener("click", moveInputLabel);
+                });
+
             document
-                .querySelector<HTMLElement>("#ldap2 > td.al.lbCell > b")
-                ?.addEventListener("click", moveInputLabel);
+                .querySelectorAll(
+                    ".loginForm :is(#ldap1, #ldap2, #ldap3) input",
+                )
+                .forEach((e: Element) => {
+                    if (!(e instanceof HTMLInputElement)) return;
 
-            const inputs = document.getElementsByTagName("input");
-            inputs[0].addEventListener("focus", loginFocus);
-            inputs[1].addEventListener("focus", loginFocus);
-
-            inputs[0].addEventListener("focusout", loginFocusOut);
-            inputs[1].addEventListener("focusout", loginFocusOut);
+                    e.addEventListener("focus", loginFocus);
+                    e.addEventListener("focusout", loginFocusOut);
+                });
 
             const langElement = document.getElementsByName("lang")[0];
-            uniselect.insertBefore(langElement, uniselect.firstChild);
             langElement.outerHTML += this.langGlobe;
-            langElement.classList.remove("fw");
 
             // in firefox, when opening the page, load the selected login type
             // @ts-expect-error browser is only defined in Chrome and thus is not in types as a global variable
@@ -114,6 +117,7 @@ export const uniChange = (event: MouseEvent) => {
         i = 0;
     document.getElementById("uniSel")?.childNodes.forEach((e) => {
         if (!(e instanceof HTMLElement)) return;
+        if (!e.classList.contains("uniVal")) return;
         e.removeAttribute("active");
         if (e == target) {
             i = c;
