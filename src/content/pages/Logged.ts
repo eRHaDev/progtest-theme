@@ -176,7 +176,7 @@ export class Logged implements Page {
         text = text.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
         const doc = new DOMParser().parseFromString(text, "text/html");
         const allLinks = doc.querySelectorAll<HTMLAnchorElement>(
-            `.bLink[href*="${href}"]`,
+            `.bigButLink a[href*="${href}"]`,
         );
         const links: HTMLAnchorElement[] = [];
         allLinks.forEach((link) => {
@@ -212,6 +212,7 @@ export class Logged implements Page {
             }
             const text = await course.text();
             const taskLinks = Logged.getLinksFromHTML(text, "TaskGrp");
+            console.log(taskLinks);
             if (!taskLinks) {
                 return;
             }
