@@ -496,27 +496,26 @@ select[name="UID_UNIVERSITY"] {
 /** item header */
 
 table.header {
-    background: none !important;
-    background-color: #fff;
-    padding-bottom: 8px;
+    padding: 12px;
     margin-bottom: 20px;
 }
 
-td.header {
+table.header td {
+    font-size: 1rem;
     position: relative;
 }
 
-td.header > b {
-    font-size: 3.5rem;
+table.header td > b {
+    font-size: 1.25rem;
     font-weight: 300;
     line-height: 1.2;
 }
 
-td.header > small {
+table.header td > small {
     position: absolute;
     bottom: 0;
     right: 0;
-    font-size: 2rem;
+    font-size: 0.5rem;
     font-weight: 100;
 }
 
@@ -524,7 +523,7 @@ td[valign="top"] {
     vertical-align: middle;
 }
 
-.outBox > table:not(.header) {
+table:not(.header) {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) /*!important*/;
     border: solid thin rgba(0, 0, 0, 0.125);
     border-radius: 3px;
@@ -532,9 +531,26 @@ td[valign="top"] {
 
 /** item body */
 
-.rtbCell > .outButton,
-.rtbCell > .but1 {
+#maintable div.bUpd input {
+    text-align: center;
+}
+
+form > center > div:first-child td:has(div.bUpd),
+form > center > div:first-child td:has(div.bLink) {
+    padding: 0;
+}
+
+form > center > div:first-child td > div.bUpd,
+form > center > div:first-child td > div.bLink {
+    width: 80%;
+    height: 100%;
+    padding: 0;
     float: right;
+}
+
+form > center > div:first-child td > div.bUpd input,
+form > center > div:first-child td > div.bLink a {
+    padding: 8px 0px;
 }
 
 .rtbCell > table {
@@ -632,19 +648,19 @@ td[valign="top"] {
     cursor: pointer;
 }
 
-form > center > div:not(:nth-child(1)) .lrtbCell ul {
+form > center > div:not(:nth-child(1)) tr:nth-child(4) ul {
     list-style: none;
     padding-inline-start: 10px;
     margin-top: 3px;
 }
 
-form > center > div:not(:nth-child(1)) .lrtbCell li {
+form > center > div:not(:nth-child(1)) tr:nth-child(4) li {
     font-weight: 700;
     letter-spacing: 0.1px;
     padding: 5px 0;
 }
 
-form > center > div:not(:nth-child(1)) .lrtbCell li:last-child {
+form > center > div:not(:nth-child(1)) tr:nth-child(4) li:last-child {
     font-weight: 700;
     font-size: 11pt;
 }
@@ -991,17 +1007,6 @@ table.resultLayout > tbody > tr:hover {
     background-color: rgba(0, 0, 0, 0.125) !important;
 }
 
-table.resultLayout > tbody > tr > td.nOk {
-    color: #b24463;
-}
-
-table.resultLayout > tbody > tr > td.yOk::before {
-    content: "✅";
-}
-table.resultLayout > tbody > tr > td.yOk {
-    color: #58d58c;
-}
-
 /*
 tr.resStat td {
     font-weight: normal;
@@ -1051,13 +1056,13 @@ input.err {
     color: #fff;
 }
 
-.updButton,
+div.bUpd input,
 .disButton,
 .delButton,
 .insButton,
 .fltButton,
 .seekButton,
-div.but2 > a {
+div.bLink a {
     box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.175) !important;
     border-radius: 4px;
     border: 1px solid;
@@ -1072,32 +1077,32 @@ div.but2 > a {
     text-align: center;
 }
 
-div.but2 {
-    margin: 0 4px;
+div.bLink a[href*="X=Task&"] {
+    width: auto;
 }
 
-.updButton,
-a.butLink {
+div.bUpd input,
+div.bLink a {
     outline-color: #263238;
 }
 
-.updButton:hover,
+div.bUpd input:hover,
 .disButton:hover,
 .delButton:hover,
 .insButton:hover,
 .fltButton:hover,
 .seekButton:hover,
-div.but2 > a:hover {
+div.bLink a:hover {
     box-shadow: inset 0 0 0 99999px rgba(255, 255, 255, 0.125) !important;
 }
 
-.updButton:active,
+div.bUpd input:active,
 .disButton:active,
 .delButton:active,
 .insButton:active,
 .fltButton:active,
 .seekButton:active,
-div.but2 > a:active {
+div.bLink a:active {
     outline: none;
     box-shadow: inset 0 0 0 99999px rgba(0, 0, 0, 0.2) !important;
 }
@@ -1235,10 +1240,10 @@ a.butSortHi {
     color: #ff00ff;
 }
 .yOk:before {
-    content: "✔️";
+    content: "✅";
 }
 .oOk:before {
-    content: "✔️";
+    content: "✅";
     color: rgba(0, 0, 0, 0.15);
     text-shadow: 0 0 0 #ffc107;
 }
@@ -1250,6 +1255,14 @@ a.butSortHi {
     float: left;
     width: 1.5em;
     text-align: center;
+}
+
+.yOk, .oOk {
+    color: #58d58c;
+}
+
+.wOk, .nOk {
+    color: #b24463;
 }
 
 select.std,

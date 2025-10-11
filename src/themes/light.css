@@ -236,7 +236,7 @@ table.header {
     border-bottom: solid thin rgba(0, 0, 0, 0.175);
 }
 
-.outBox > table:not(.header) {
+table {
     background-color: #fff !important;
 }
 
@@ -294,21 +294,21 @@ body > center > table > tbody > tr:nth-child(even) {
 
 /** results table */
 
-tr.resRow td {
+table.resultLayout > thead > tr > td {
     /*border-top: thin solid rgba(0, 0, 0, 0.125);*/
     border-top: thin solid #eee;
 }
 
-tr.resRow:nth-child(even) {
+table.resultLayout > thead > tr:nth-child(even) {
     /*background-color: rgba(0, 0, 0, 0.025);*/
     background-color: #f8f8f8;
 }
 
-.hdrCell {
+table.resultLayout > thead > tr > td {
     color: #000000;
 }
 
-tr.resHdr td > a {
+table.resultLayout > thead > tr > td > a {
     color: #000000;
 }
 
@@ -366,8 +366,8 @@ input.err {
     background-color: #f13636;
 }
 
-.updButton,
-a.butLink {
+div.bUpd input,
+div.bLink a {
     background-color: #607d8b;
     border-color: #455a64 !important;
     text-shadow: 0 1px 0 #455a64;

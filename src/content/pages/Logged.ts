@@ -117,10 +117,15 @@ export class Logged implements Page {
 
     highlightCode() {
         document
-            .querySelectorAll<HTMLElement>("pre, code, tt")
+            .querySelectorAll<HTMLElement>(
+                "pre:not(.hljs), code:not(.hljs), tt:not(.hjls)",
+            )
             .forEach((block) => {
                 if (this.settings.syntaxHighlighting) {
-                    window.hljs.highlightBlock(block);
+                    block.innerHTML =
+                        block.textContent || block.innerText || "";
+
+                    window.hljs.highlightElement(block);
                 } else {
                     block.classList.add("hljs");
                 }
@@ -212,7 +217,6 @@ export class Logged implements Page {
             }
             const text = await course.text();
             const taskLinks = Logged.getLinksFromHTML(text, "TaskGrp");
-            console.log(taskLinks);
             if (!taskLinks) {
                 return;
             }

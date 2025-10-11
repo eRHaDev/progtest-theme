@@ -32,6 +32,9 @@ export class Task extends Logged {
             setTimeout(() => progress.scrollIntoView({ block: "center" }), 10);
         }
 
+        // Mark header
+        document.querySelector("form table")?.classList.add("header");
+
         this.replaceCountdown();
 
         this.easterEgg();
@@ -73,7 +76,7 @@ export class Task extends Logged {
         if (elm.innerHTML == "&nbsp;") {
             return;
         }
-        elm.style.minWidth = "200px";
+        elm.style.minWidth = "300px";
         const deadline =
             parseInt(elm.innerHTML.slice(0, -4)) * 1000 + new Date().getTime();
 
@@ -114,7 +117,7 @@ export class Task extends Logged {
     static markResultsTable() {
         document
             .querySelectorAll(
-                "form > center > div:not(:nth-child(1)) .lrtbCell li > ul:only-child",
+                "form > center > div:not(:nth-child(1)) table tr:nth-child(4) li > ul:only-child",
             )
             .forEach((e) => {
                 const node = e.previousSibling;
@@ -360,13 +363,13 @@ export class Task extends Logged {
             "rtbEditSepCell",
         ].forEach((n) => {
             document
-                .querySelectorAll("td." + n + " > div.but1.w120")
-                .forEach((e) => {
-                    const resHead = e.parentNode?.parentNode;
-                    if (!(resHead instanceof HTMLElement)) return;
-                    resHead.classList.add("dropDownHeader");
-                    resHead.addEventListener("click", toggleDropDown);
-                    resHead.click();
+                .querySelectorAll("table#maintable tbody tr:has(td." + n + ")")
+                .forEach((e: Element) => {
+                    if (!(e instanceof HTMLElement)) return;
+
+                    e.classList.add("dropDownHeader");
+                    e.addEventListener("click", toggleDropDown);
+                    e.click();
                 });
         });
     }
