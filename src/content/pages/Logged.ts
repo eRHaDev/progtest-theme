@@ -62,7 +62,7 @@ export class Logged implements Page {
         const bell = document.createElement("div");
         bell.classList.add("notify", "off");
         bell.addEventListener("click", Logged.notifyToggle.bind(this));
-        const logout = document.querySelector('.navLink[href*="Logout"]');
+        const logout = document.querySelector('.navLink a[href*="Logout"]');
         logout?.parentNode?.insertBefore(bell, logout);
 
         document.addEventListener("click", (e) => {
@@ -176,7 +176,7 @@ export class Logged implements Page {
         text = text.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
         const doc = new DOMParser().parseFromString(text, "text/html");
         const allLinks = doc.querySelectorAll<HTMLAnchorElement>(
-            `.butLink[href*="${href}"]`,
+            `.bLink[href*="${href}"]`,
         );
         const links: HTMLAnchorElement[] = [];
         allLinks.forEach((link) => {

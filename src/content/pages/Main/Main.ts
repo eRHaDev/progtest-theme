@@ -13,7 +13,9 @@ export type MenuItem = {
 
 export type Subjects = Record<string, MenuItem[]>;
 
-type ParsedItem = Pick<MenuItem, "title" | "text" | "link"> & { semester: string }
+type ParsedItem = Pick<MenuItem, "title" | "text" | "link"> & {
+    semester: string;
+};
 
 type CoursesInfo = {
     semester: string;
@@ -83,11 +85,13 @@ export class Main extends Logged {
                 return;
             }
 
-            let year = item.semester.match(/\d+\/\d+/)[0];
+            const year = item.semester.match(/\d+\/\d+/);
 
             const footer = item.semester;
-            const semesterKey = `B${year.split("/")[0].substring(2)}${item.semester.includes("Zimní") ? 1 : 2
-                }`;
+            const semesterKey = `B${(year
+                ? year[0].split("/")[0]
+                : ""
+            ).substring(2)}${item.semester.includes("Zimní") ? 1 : 2}`;
             const subjectHomepage =
                 subjectInfo.courses[item.title]?.homepage ??
                 `https://courses.fit.cvut.cz/${item.title}`;
@@ -104,7 +108,9 @@ export class Main extends Logged {
         });
 
         const container = document.createElement("div");
-        document.querySelector("div.navLink.navbar")?.insertAdjacentElement("afterend", container);
+        document
+            .querySelector("div.navLink.navbar")
+            ?.insertAdjacentElement("afterend", container);
         new MainComponent({
             target: container,
             props: { subjects, settings },
@@ -113,24 +119,22 @@ export class Main extends Logged {
 }
 
 function parseItems(): ParsedItem[] {
-    let items: ParsedItem[] = [];
+    const items: ParsedItem[] = [];
 
-    document.querySelectorAll("details.menuList").forEach(
-        (semester) => {
-            semester.querySelectorAll("div.bigButLink").forEach((subject) => {
-                const link = subject.querySelector("a");
-                const name = subject.querySelector("span");
-                const title = subject.nextElementSibling?.querySelector("span");
-                items.push({
-                    title: name?.innerText ?? "",
-                    text: title?.innerText ?? "",
-                    link: link?.href ?? "",
-                    semester: semester.querySelector("summary")?.innerText ?? ""
-                });
-            })
-            semester.remove();
-        }
-    )
+    document.querySelectorAll("details.menuList").forEach((semester) => {
+        semester.querySelectorAll("div.bigButLink").forEach((subject) => {
+            const link = subject.querySelector("a");
+            const name = subject.querySelector("span");
+            const title = subject.nextElementSibling?.querySelector("span");
+            items.push({
+                title: name?.innerText ?? "",
+                text: title?.innerText ?? "",
+                link: link?.href ?? "",
+                semester: semester.querySelector("summary")?.innerText ?? "",
+            });
+        });
+        semester.remove();
+    });
 
     return items;
 }

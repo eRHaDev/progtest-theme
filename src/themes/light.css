@@ -73,11 +73,11 @@ select {
 
 /** header */
 
-body > table {
+.navbar {
     background-color: #343a40 !important;
 }
 
-body > table td {
+.navbar > div {
     background-color: #343a40 !important;
 }
 

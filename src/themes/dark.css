@@ -97,11 +97,11 @@ select > option {
 
 /** header */
 
-body > table {
+.navbar {
     background-color: #1c1e1f !important;
 }
 
-body > table td {
+.navbar > div {
     background-color: #1c1e1f !important;
 }
 

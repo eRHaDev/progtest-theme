@@ -288,57 +288,38 @@ select[name="UID_UNIVERSITY"] {
 
 /** header */
 
-body > table {
+.navbar {
     z-index: 100;
     min-height: 38px !important;
-    padding: 8px 16px;
     position: fixed;
     top: 0;
     transition: padding 0.1s ease;
     box-shadow: 0 -3px 3px 3px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
 }
 
-tr[height="25"] {
-    height: initial;
+.navbar > div {
+    padding: 16px 32px;
 }
 
-body > table td {
-    padding: 8px 0;
+.navbar div:nth-child(2) {
+    display: flex;
+    gap: 16px;
 }
 
-body > table * {
+.navbar * {
     color: rgba(255, 255, 255, 0.5) !important;
     font-weight: normal !important;
     font-size: 16px;
-    padding: 15px 0;
 }
 
-.menuSep {
-    padding: 0;
-}
-
-body > table b {
+.navbar b {
     color: rgba(255, 255, 255, 0.75) !important;
 }
 
-body > table a:hover {
-    color: #fff !important;
-}
-
-body > table td > span {
-    visibility: hidden;
-}
-
-body > table td > span > * {
-    visibility: initial;
-}
-
-span.navLink b {
-    color: #fff !important;
-}
-
-body > table td:nth-child(1) > span > *:nth-child(1) {
-    font-size: 20px;
+.navbar a:hover {
     color: #fff !important;
 }
 
@@ -372,12 +353,10 @@ body > table td:nth-child(1) > span > *:nth-child(1) {
 }
 
 .notify {
-    display: inline-block;
     width: 25px;
     height: 25px;
     padding: 0;
     vertical-align: top;
-    margin-right: 30px;
     cursor: pointer;
     user-select: none;
 }
