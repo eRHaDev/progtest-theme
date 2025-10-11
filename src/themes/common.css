@@ -961,36 +961,45 @@ body > center > table > thead > tr > td:nth-child(3) > div > div {
 
 /** results table */
 
-tr.resRow td {
-    padding: 2px 8px;
-}
-
-tr.resRow:hover {
-    background-color: rgba(0, 0, 0, 0.125) !important;
-}
-
-tr.resHdr td {
-    background-color: rgba(0, 0, 0, 0.075);
-    height: 20px;
-}
-
-.hdrCell {
-    background-color: rgba(0, 0, 0, 0.075);
-    height: 20px;
-    padding: 2px 0;
-    text-indent: 8px;
-}
-
-tr.resHdr td > a {
+table.resultLayout > thead > tr > td > a {
     padding: 2px 0;
     text-indent: 8px;
     width: 100%;
     height: 100%;
     display: block;
+    align-content: center;
 }
 
-tr.resHdr td > a:hover {
+table.resultLayout > thead > tr > td > a:hover {
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+table.resultLayout > thead > tr:first-child > td:not(:first-child) > a {
+    text-align: center;
+}
+
+table.resultLayout > thead > tr > td {
+    background-color: rgba(0, 0, 0, 0.075);
+    height: 20px;
+}
+
+table.resultLayout > tbody > tr > td {
+    padding: 2px 8px;
+}
+
+table.resultLayout > tbody > tr:hover {
+    background-color: rgba(0, 0, 0, 0.125) !important;
+}
+
+table.resultLayout > tbody > tr > td.nOk {
+    color: #b24463;
+}
+
+table.resultLayout > tbody > tr > td.yOk::before {
+    content: "✅";
+}
+table.resultLayout > tbody > tr > td.yOk {
+    color: #58d58c;
 }
 
 /*
