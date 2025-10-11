@@ -1,15 +1,16 @@
+import { pttLoadedEvent } from "../events";
 import { MessageType } from "../messages";
 import { ExtensionSettings } from "../settings";
+
 import { Course } from "./pages/Course/Course";
 import { ErrorPage } from "./pages/Error/Error";
 import { Exam } from "./pages/Exam";
 import { Logged } from "./pages/Logged";
 import { Login } from "./pages/Login";
 import { Main } from "./pages/Main/Main";
+import { Page } from "./pages/Page";
 import { Results } from "./pages/Results";
 import { Task } from "./pages/Task";
-import { pttLoadedEvent } from "../events";
-import { Page } from "./pages/Page";
 
 const getMessage = (classes: string[], message: string) => {
     const div = document.createElement("div");
@@ -29,7 +30,7 @@ const main = async (settings: ExtensionSettings) => {
     // show message for new users
     const message = getMessage(
         ["install-message"],
-        "PTT theme couldn't load.\nTry to force refresh the page.\n(Ctrl+Shift+R / Cmd+Shift+R)",
+        "PTT theme couldn't load.\nTry to force refresh the page.\n(Ctrl+Shift+R / Cmd+Shift+R)"
     );
     message.style.fontSize = "40px";
     document.body.prepend(message);
@@ -77,12 +78,9 @@ const main = async (settings: ExtensionSettings) => {
                 }
                 default: {
                     // determine if site is really main
-                    const navlink =
-                        document.querySelector<HTMLSpanElement>("span.navlink"); // first time login
+                    const navlink = document.querySelector<HTMLSpanElement>("span.navlink"); // first time login
                     if (
-                        document.querySelector(
-                            'span.navLink > a.navLink[href="?X=Main"]',
-                        ) ||
+                        document.querySelector('span.navLink > a.navLink[href="?X=Main"]') ||
                         (navlink && navlink.innerText.includes("Než"))
                     ) {
                         page = new Logged(settings);
@@ -118,10 +116,7 @@ const replaceStyles = (theme: string) => {
     link.setAttribute("rel", "stylesheet");
     link.setAttribute("type", "text/css");
 
-    link.setAttribute(
-        "href",
-        chrome.runtime.getURL("themes/" + theme + ".css"),
-    );
+    link.setAttribute("href", chrome.runtime.getURL("themes/" + theme + ".css"));
     document.getElementsByTagName("head")[0].appendChild(link);
     return new Promise((resolve) => {
         link.onload = resolve;
@@ -148,10 +143,10 @@ chrome.runtime.sendMessage(
             replaceStyles(settings.theme).then(() => {
                 console.log("PTT styles loaded");
             }),
-            !["orig", "orig-dark"].includes(settings.theme) && main(settings),
+            !["orig", "orig-dark"].includes(settings.theme) && main(settings)
         ]);
         await addLoadingOffStyle();
         console.log("PTT loaded");
         document.dispatchEvent(pttLoadedEvent);
-    },
+    }
 );

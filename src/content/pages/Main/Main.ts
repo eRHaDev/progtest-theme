@@ -1,5 +1,6 @@
 import { ExtensionSettings } from "../../../settings";
 import { Logged } from "../Logged";
+
 import MainComponent from "./Main.svelte";
 
 export type MenuItem = {
@@ -58,8 +59,8 @@ export class Main extends Logged {
             {
                 method: "GET",
                 mode: "cors",
-                credentials: "omit",
-            },
+                credentials: "omit"
+            }
         ).then((response) => response.json());
 
         const subjects: Subjects = {};
@@ -80,7 +81,7 @@ export class Main extends Logged {
                     title: item.title,
                     text: item.text,
                     icon,
-                    link: item.link,
+                    link: item.link
                 });
                 return;
             }
@@ -88,10 +89,9 @@ export class Main extends Logged {
             const year = item.semester.match(/\d+\/\d+/);
 
             const footer = item.semester;
-            const semesterKey = `B${(year
-                ? year[0].split("/")[0]
-                : ""
-            ).substring(2)}${item.semester.includes("Zimní") ? 1 : 2}`;
+            const semesterKey = `B${(year ? year[0].split("/")[0] : "").substring(
+                2
+            )}${item.semester.includes("Zimní") ? 1 : 2}`;
             const subjectHomepage =
                 subjectInfo.courses[item.title]?.homepage ??
                 `https://courses.fit.cvut.cz/${item.title}`;
@@ -103,17 +103,15 @@ export class Main extends Logged {
                 icon,
                 link: item.link,
                 subjectHomepage,
-                footer,
+                footer
             });
         });
 
         const container = document.createElement("div");
-        document
-            .querySelector("div.navLink.navbar")
-            ?.insertAdjacentElement("afterend", container);
+        document.querySelector("div.navLink.navbar")?.insertAdjacentElement("afterend", container);
         new MainComponent({
             target: container,
-            props: { subjects, settings },
+            props: { subjects, settings }
         });
     }
 }
@@ -130,7 +128,7 @@ function parseItems(): ParsedItem[] {
                 title: name?.innerText ?? "",
                 text: title?.innerText ?? "",
                 link: link?.href ?? "",
-                semester: semester.querySelector("summary")?.innerText ?? "",
+                semester: semester.querySelector("summary")?.innerText ?? ""
             });
         });
         semester.remove();
@@ -153,7 +151,7 @@ function getMenuIcon(title: string) {
             "NI-PDP": "icon-pdp",
             Nastavení: "icon-setting",
             Překladače: "icon-compile",
-            FAQ: "icon-faq",
+            FAQ: "icon-faq"
         }[title] || "icon-unknown"
     );
 }

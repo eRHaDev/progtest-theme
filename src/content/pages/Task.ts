@@ -1,4 +1,5 @@
 import { ExtensionSettings } from "../../settings";
+
 import { Logged } from "./Logged";
 
 export class Task extends Logged {
@@ -16,13 +17,11 @@ export class Task extends Logged {
         }
 
         // mark help checkboxes for grid
-        document
-            .querySelectorAll('input[type="checkbox"][name]')
-            .forEach((e) => {
-                const parent = e.parentNode;
-                if (!(parent instanceof HTMLElement)) return;
-                parent.className += " gridHelp";
-            });
+        document.querySelectorAll('input[type="checkbox"][name]').forEach((e) => {
+            const parent = e.parentNode;
+            if (!(parent instanceof HTMLElement)) return;
+            parent.className += " gridHelp";
+        });
 
         Task.markResultsTable();
 
@@ -43,7 +42,7 @@ export class Task extends Logged {
     static fixLinks() {
         document
             .querySelectorAll(
-                '[href*="?X=Advice&"], [href*="?X=TaskD&"], [href*="?X=TaskS&"], [href*="?X=DryRunD&"], [href*="?X=DryRunO&"], [href*="?X=DryRunI&"], [href*="?X=CompileD&"]',
+                '[href*="?X=Advice&"], [href*="?X=TaskD&"], [href*="?X=TaskS&"], [href*="?X=DryRunD&"], [href*="?X=DryRunO&"], [href*="?X=DryRunI&"], [href*="?X=CompileD&"]'
             )
             .forEach((e) => {
                 e.setAttribute("target", "_blank");
@@ -56,14 +55,11 @@ export class Task extends Logged {
         }
         // block setTimeout calls
         const elt = document.createElement("script");
-        elt.innerHTML =
-            "window.setCountdown();window.setCountdown = function () {};";
+        elt.innerHTML = "window.setCountdown();window.setCountdown = function () {};";
         document.head.appendChild(elt);
 
         // rename element
-        document
-            .getElementById("countdown")
-            ?.setAttribute("id", "ptt-countdown");
+        document.getElementById("countdown")?.setAttribute("id", "ptt-countdown");
 
         // create hidden mocked element
         const hide = document.createElement("div");
@@ -77,8 +73,7 @@ export class Task extends Logged {
             return;
         }
         elm.style.minWidth = "300px";
-        const deadline =
-            parseInt(elm.innerHTML.slice(0, -4)) * 1000 + new Date().getTime();
+        const deadline = parseInt(elm.innerHTML.slice(0, -4)) * 1000 + new Date().getTime();
 
         const loop = () => {
             const remaining = (deadline - new Date().getTime()) / 1000;
@@ -86,13 +81,9 @@ export class Task extends Logged {
             if (remaining > 86400) {
                 const days = Math.floor(remaining / 86400);
                 t += (
-                    [
-                        "",
-                        "á <b>{} den",
-                        "ají <b>{} dny",
-                        "ají <b>{} dny",
-                        "ají <b>{} dny",
-                    ][remaining / 86400] || "á <b>{} dní"
+                    ["", "á <b>{} den", "ají <b>{} dny", "ají <b>{} dny", "ají <b>{} dny"][
+                        remaining / 86400
+                    ] || "á <b>{} dní"
                 ).replace("{}", days.toString());
                 t += ", ";
             } else {
@@ -117,7 +108,7 @@ export class Task extends Logged {
     static markResultsTable() {
         document
             .querySelectorAll(
-                "form > center > div:not(:nth-child(1)) table tr:nth-child(4) li > ul:only-child",
+                "form > center > div:not(:nth-child(1)) table tr:nth-child(4) li > ul:only-child"
             )
             .forEach((e) => {
                 const node = e.previousSibling;
@@ -125,11 +116,7 @@ export class Task extends Logged {
                 if (node && node.parentElement) {
                     const text = node.textContent;
                     if (text?.includes("Úspěch")) {
-                        if (
-                            e.firstElementChild?.innerHTML.includes(
-                                "Dosaženo: 100.00 %",
-                            )
-                        ) {
+                        if (e.firstElementChild?.innerHTML.includes("Dosaženo: 100.00 %")) {
                             node.parentElement.className += " testRes testOK";
                             state = "ok";
                         } else {
@@ -138,9 +125,7 @@ export class Task extends Logged {
                         }
                     } else if (
                         text?.includes("Neúspěch") ||
-                        text?.includes(
-                            "Program provedl neplatnou operaci a byl ukončen",
-                        ) ||
+                        text?.includes("Program provedl neplatnou operaci a byl ukončen") ||
                         text?.includes("Program překročil přidělenou maximální")
                     ) {
                         node.parentElement.className += " testRes testFailed";
@@ -149,9 +134,7 @@ export class Task extends Logged {
                         node.parentElement.className += " testRes testUnknown";
                         state = "light";
                     }
-                    const testName = text?.match(
-                        /Test '(.*)': (Úspěch|Neúspěch|Nebylo testováno)/,
-                    );
+                    const testName = text?.match(/Test '(.*)': (Úspěch|Neúspěch|Nebylo testováno)/);
                     if (testName != null) {
                         node.textContent = testName[1];
                     }
@@ -159,8 +142,8 @@ export class Task extends Logged {
 
                 const score = [
                     ...(e.childNodes[0] as HTMLElement).innerText.matchAll(
-                        /Dosaženo: (\d{1,3}.\d{0,2}).*?požadováno: (\d{1,3}.\d{0,2})/g,
-                    ),
+                        /Dosaženo: (\d{1,3}.\d{0,2}).*?požadováno: (\d{1,3}.\d{0,2})/g
+                    )
                 ];
                 let scoreElem: HTMLElement;
                 if (score.length == 1 && score[0].length == 3) {
@@ -175,21 +158,14 @@ export class Task extends Logged {
                         "</b>/" +
                         parseFloat(score[0][2]).toFixed(0) +
                         "</label>";
-                    e.parentElement?.insertBefore(
-                        scoreElem,
-                        e.parentElement.firstChild,
-                    );
+                    e.parentElement?.insertBefore(scoreElem, e.parentElement.firstChild);
                 } else {
                     scoreElem = document.createElement("badge");
                     scoreElem.style.marginRight = "10px";
                     scoreElem.style.minWidth = "120px";
                     scoreElem.classList.add(state);
-                    scoreElem.innerHTML =
-                        '<label title="Dosaženo / požadováno"><b>0</b></label>';
-                    e.parentElement?.insertBefore(
-                        scoreElem,
-                        e.parentElement.firstChild,
-                    );
+                    scoreElem.innerHTML = '<label title="Dosaženo / požadováno"><b>0</b></label>';
+                    e.parentElement?.insertBefore(scoreElem, e.parentElement.firstChild);
                 }
 
                 const badges = document.createElement("div");
@@ -209,8 +185,7 @@ export class Task extends Logged {
                         if (f.innerText.includes("Bonus nebude udělen")) {
                             scoreMult = 0;
                         } else {
-                            const multText =
-                                f.innerText.match(/(\d{1,3}.\d{2}) %/);
+                            const multText = f.innerText.match(/(\d{1,3}.\d{2}) %/);
                             if (multText == null) {
                                 return;
                             }
@@ -229,10 +204,7 @@ export class Task extends Logged {
                             const testTypeElem = document.createElement("span");
                             testTypeElem.classList.add("testType");
                             testTypeElem.innerText = testType + ": ";
-                            node?.parentElement?.insertBefore(
-                                testTypeElem,
-                                node,
-                            );
+                            node?.parentElement?.insertBefore(testTypeElem, node);
                             markForRemove.push(f);
                         }
 
@@ -243,7 +215,7 @@ export class Task extends Logged {
                     } else if (
                         f.innerText.includes("Celková doba běhu:") ||
                         f.innerText.includes(
-                            "Vyčerpání limitu na celý test, program násilně ukončen",
+                            "Vyčerpání limitu na celý test, program násilně ukončen"
                         ) ||
                         f.innerText.includes("Program násilně ukončen po")
                     ) {
@@ -256,15 +228,9 @@ export class Task extends Logged {
                                 const timeMe = parseFloat(time[0][1]);
                                 const timeLimit = parseFloat(time[1][1]);
                                 if (timeMe >= timeLimit) {
-                                    timeElem.classList.replace(
-                                        "info",
-                                        "danger",
-                                    );
+                                    timeElem.classList.replace("info", "danger");
                                 }
-                                timeElem.setAttribute(
-                                    "title",
-                                    "Celkový čas / limit",
-                                );
+                                timeElem.setAttribute("title", "Celkový čas / limit");
                                 timeElem.innerHTML =
                                     "<label>⏱️ <b>" +
                                     timeMe.toFixed(3) +
@@ -288,15 +254,11 @@ export class Task extends Logged {
                             memElem.classList.add("info");
                             if (memory.length == 2) {
                                 const memMe = parseFloat(memory[0][1]) * 1024;
-                                const memLimit =
-                                    parseFloat(memory[1][1]) * 1024;
+                                const memLimit = parseFloat(memory[1][1]) * 1024;
                                 if (memMe >= memLimit) {
                                     memElem.classList.replace("info", "danger");
                                 }
-                                memElem.setAttribute(
-                                    "title",
-                                    "Celková paměť / limit",
-                                );
+                                memElem.setAttribute("title", "Celková paměť / limit");
                                 memElem.innerHTML =
                                     "<label>💾 <b>" +
                                     Task.convertMemory(memMe) +
@@ -307,9 +269,7 @@ export class Task extends Logged {
                                 memElem.setAttribute("title", "Celková paměť");
                                 memElem.innerHTML =
                                     "<label>💾 <b>" +
-                                    Task.convertMemory(
-                                        parseFloat(memory[0][1]) * 1024,
-                                    ) +
+                                    Task.convertMemory(parseFloat(memory[0][1]) * 1024) +
                                     "</b></label>";
                             }
                             badges.appendChild(memElem);
@@ -327,11 +287,7 @@ export class Task extends Logged {
 
     static convertMemory(size: number) {
         const i = Math.floor(Math.log(size) / Math.log(1024));
-        return (
-            Math.floor(size / Math.pow(1024, i)) * 1 +
-            " " +
-            ["B", "kB", "MB", "GB", "TB"][i]
-        );
+        return Math.floor(size / Math.pow(1024, i)) * 1 + " " + ["B", "kB", "MB", "GB", "TB"][i];
     }
 
     static autoHideResults() {
@@ -360,7 +316,7 @@ export class Task extends Logged {
             "rtbHalfSepCell",
             "rtbXSepCell",
             "rtbFailSepCell",
-            "rtbEditSepCell",
+            "rtbEditSepCell"
         ].forEach((n) => {
             document
                 .querySelectorAll("table#maintable tbody tr:has(td." + n + ")")
@@ -382,29 +338,22 @@ export class Task extends Logged {
         }
 
         const params = window.location.search.split("&");
-        const task = btoa(
-            (params[1] || "") + (params[2] || "") + (params[3] || ""),
-        );
+        const task = btoa((params[1] || "") + (params[2] || "") + (params[3] || ""));
 
         if (document.getElementById("refProgress")) {
             storage.setItem("upload", "true");
             storage.setItem("task", task);
             return;
-        } else if (
-            storage.getItem("upload") == "true" &&
-            storage.getItem("task") == task
-        ) {
+        } else if (storage.getItem("upload") == "true" && storage.getItem("task") == task) {
             // upload ended and ptt has never seen this page before (yay!)
             if (
                 this.settings.playSounds &&
                 document.querySelector(
-                    "form > center > div.topLayout:nth-child(5) > div.outBox > table > tbody > tr.dropDownHeader > td.ltbOkSepCell",
+                    "form > center > div.topLayout:nth-child(5) > div.outBox > table > tbody > tr.dropDownHeader > td.ltbOkSepCell"
                 )
             ) {
                 try {
-                    new Audio(
-                        chrome.runtime.getURL("./themes/assets/turret.ogg"),
-                    ).play();
+                    new Audio(chrome.runtime.getURL("./themes/assets/turret.ogg")).play();
                 } catch {
                     console.error("Failed to play sound");
                 }

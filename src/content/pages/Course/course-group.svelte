@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { CourseGroup, CourseItem, isToday } from "./Course";
+    import { isToday } from "./Course.ts";
+    import type { CourseGroup, CourseItem } from "./Course.ts";
     import cx from "classnames";
 
     export let group: CourseGroup;
@@ -14,8 +15,8 @@
                 acc[curr.type].push(curr);
                 return acc;
             },
-            {} as Record<string, CourseItem[]>,
-        ),
+            {} as Record<string, CourseItem[]>
+        )
     );
     const sum = (entries: CourseItem[]) =>
         entries.reduce((acc, curr) => acc + (curr.score ?? 0), 0);
@@ -41,16 +42,14 @@
                     class={cx("course_link", `course_link_type_${entry.type}`, {
                         course_disabled: entry.disabled,
                         course_deadline_today:
-                            entry.closes && isToday(entry.closes) && entry.score === 0,
+                            entry.closes && isToday(entry.closes) && entry.score === 0
                     })}
                     on:click={(event) => onEntryClick(event, entry)}
                 >
                     <span class="course_link_name">{entry.name}</span>
                     {#if entry.score !== undefined}
                         <span class="course_link_score"
-                            >{entry.score === null
-                                ? "--"
-                                : entry.score.toFixed(2)}</span
+                            >{entry.score === null ? "--" : entry.score.toFixed(2)}</span
                         >
                     {/if}
                     {#if entry.opens}
@@ -65,19 +64,15 @@
                         </span>
                     {/if}
                     {#if entry.closes}
-                        <span
-                            class="course_link_deadline"
-                            style="font-weight: 600"
+                        <span class="course_link_deadline" style="font-weight: 600"
                             >🏁 {entry.closes.toLocaleString("cs-CZ")}</span
                         >
                     {/if}
                 </a>
             {/each}
             <span
-                class={cx(
-                    "course_link course_link_score_sum",
-                    `course_link_type_${items[0].type}`,
-                )}>{sum(items).toFixed(2)}</span
+                class={cx("course_link course_link_score_sum", `course_link_type_${items[0].type}`)}
+                >{sum(items).toFixed(2)}</span
             >
         {/each}
     </div>

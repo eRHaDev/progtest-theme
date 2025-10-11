@@ -1,6 +1,7 @@
 import { ExtensionSettings } from "../../../settings";
-import { Logged } from "../Logged";
 import { buildLink, getCourseId } from "../../utils";
+import { Logged } from "../Logged";
+
 import CourseComponent from "./Course.svelte";
 
 export interface CourseItem {
@@ -37,7 +38,7 @@ export class Course extends Logged {
         document.body.appendChild(container);
         new CourseComponent({
             target: container,
-            props: { courseGroups: tasks },
+            props: { courseGroups: tasks }
         });
     }
 }
@@ -57,9 +58,7 @@ export async function GetTasks() {
         const tasks: CourseItem[] = [];
 
         if (!groupName) {
-            throw new Error(
-                "Missing required group name: " + JSON.stringify(groupName),
-            );
+            throw new Error("Missing required group name: " + JSON.stringify(groupName));
         }
 
         if (groupName === "Výsledky") {
@@ -72,16 +71,22 @@ export async function GetTasks() {
             let type = {
                 program: "task",
                 quiz: "test",
-                extra: "extra",
-            }[f.querySelector<HTMLImageElement>("[class*='bigBut'] img")?.src.split("/").pop()?.split(".").shift() ?? ""];
+                extra: "extra"
+            }[
+                f
+                    .querySelector<HTMLImageElement>("[class*='bigBut'] img")
+                    ?.src.split("/")
+                    .pop()
+                    ?.split(".")
+                    .shift() ?? ""
+            ];
 
             if (type == "test" && name?.toLowerCase().includes("demo")) {
                 type = "test-demo";
             }
 
-            const link: string | undefined = f.querySelector<HTMLAnchorElement>(
-                ":scope > div a",
-            )?.href;
+            const link: string | undefined =
+                f.querySelector<HTMLAnchorElement>(":scope > div a")?.href;
             const disabled: boolean = link === undefined;
             let score: number | undefined | null;
             let opens: Date | undefined;
@@ -108,10 +113,7 @@ export async function GetTasks() {
 
             if (!name || !type) {
                 console.log(f);
-                throw new Error(
-                    "Missing required properties: " +
-                        JSON.stringify([name, type]),
-                );
+                throw new Error("Missing required properties: " + JSON.stringify([name, type]));
             }
 
             tasks.push({
@@ -125,10 +127,10 @@ export async function GetTasks() {
                 bonusEnd: bonusEnd
             });
         });
-        
+
         ret.push({
             name: groupName,
-            tasks: tasks,
+            tasks: tasks
         });
     });
 
@@ -197,9 +199,7 @@ function textToDate(text: string | null): Date {
     // parse "DD.MM.YYYY HH:MM:SS"
     const [date, time] = text.split(" ") ?? [];
     const [day, month, year] = (date.split(".") ?? []).map((s) => parseInt(s));
-    const [hour, minute, second] = (time?.split(":") ?? []).map((s) =>
-        parseInt(s),
-    );
+    const [hour, minute, second] = (time?.split(":") ?? []).map((s) => parseInt(s));
     const parsedDate = new Date(year, month - 1, day, hour, minute, second);
     if (!isDateValid(parsedDate)) {
         throw new Error(`Failed to parse date: ${text}\n
@@ -229,7 +229,7 @@ function parseItemInfo(document: Document): TaskItemInfo {
         if (cells.length < 2) {
             return;
         }
-        
+
         const key = cells[0].textContent?.trim();
         const value = cells[1];
 
@@ -248,7 +248,9 @@ function parseItemInfo(document: Document): TaskItemInfo {
                     .trim();
                 break;
             case "Hodnocení:":
-                [score, scoreMax] = (value.querySelector("b")?.textContent?.split("/") ?? []).map(parseFloat);
+                [score, scoreMax] = (value.querySelector("b")?.textContent?.split("/") ?? []).map(
+                    parseFloat
+                );
                 scoreInfo = value.textContent
                     ?.replace(value.querySelector("b")?.textContent ?? "", "")
                     .trim();
@@ -259,7 +261,15 @@ function parseItemInfo(document: Document): TaskItemInfo {
     if (!title || !deadline || score === undefined || scoreMax === undefined) {
         throw new Error(
             "Failed to parse item info: " +
-            JSON.stringify({ title, deadline, lateDeadline, lateDeadlineInfo, score, scoreMax, scoreInfo })
+                JSON.stringify({
+                    title,
+                    deadline,
+                    lateDeadline,
+                    lateDeadlineInfo,
+                    score,
+                    scoreMax,
+                    scoreInfo
+                })
         );
     }
 
@@ -270,28 +280,30 @@ function parseItemInfo(document: Document): TaskItemInfo {
         lateDeadlineInfo,
         score,
         scoreMax,
-        scoreInfo,
+        scoreInfo
     };
 }
 
 function parseItemTasks(document: Document): TaskItemTask[] {
     const tasks: TaskItemTask[] = [];
-    
+
     document.querySelectorAll("table#maintable").forEach((val, i) => {
         // skip first as that one contains ItemInfo
         if (i === 0) return;
 
         const title = val.querySelector("tbody > tr:nth-child(1) > td:nth-child(2)")?.textContent;
-        const link = val.querySelector<HTMLAnchorElement>("tbody > tr:last-child a:last-child")?.href;
+        const link = val.querySelector<HTMLAnchorElement>(
+            "tbody > tr:last-child a:last-child"
+        )?.href;
         const text = val.querySelector("tbody > tr:nth-child(4) > td")?.textContent?.trim();
 
-        const submissionsText = val.querySelector("tbody > tr:nth-child(2) > td:nth-child(2)")?.textContent;
+        const submissionsText = val.querySelector(
+            "tbody > tr:nth-child(2) > td:nth-child(2)"
+        )?.textContent;
 
-        const [
-            submissions = null,
-            submissionsMax = null,
-            submissionsWithPenalty = null,
-        ] = (submissionsText?.split("/") ?? [])
+        const [submissions = null, submissionsMax = null, submissionsWithPenalty = null] = (
+            submissionsText?.split("/") ?? []
+        )
             .flatMap((s) => s.split("+"))
             .map((s) => {
                 s = s.trim();
@@ -301,15 +313,13 @@ function parseItemTasks(document: Document): TaskItemTask[] {
                 return parseInt(s);
             });
 
-        const scoreText = val.querySelector("tbody > tr:nth-child(3) > td:nth-child(2)")
-            ?.textContent;
+        const scoreText = val.querySelector(
+            "tbody > tr:nth-child(3) > td:nth-child(2)"
+        )?.textContent;
         const [score, scoreMax] = (scoreText?.split("/") ?? []).map(parseFloat);
 
         if (!title || !link || !text) {
-            throw new Error(
-                "Failed to parse item task: " +
-                    JSON.stringify({ title, link, text }),
-            );
+            throw new Error("Failed to parse item task: " + JSON.stringify({ title, link, text }));
         }
 
         tasks.push({
@@ -320,10 +330,10 @@ function parseItemTasks(document: Document): TaskItemTask[] {
             submissionsMax,
             submissionsWithPenalty,
             score,
-            scoreMax,
+            scoreMax
         });
     });
-    
+
     return tasks;
 }
 

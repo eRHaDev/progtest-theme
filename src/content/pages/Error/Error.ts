@@ -1,4 +1,5 @@
 import { Page } from "../Page";
+
 import ErrorComponent from "./Error.svelte";
 
 export class ErrorPage implements Page {
@@ -16,7 +17,7 @@ export class ErrorPage implements Page {
         document.body.insertBefore(container, center);
         new ErrorComponent({
             target: container,
-            props: { error: this.error },
+            props: { error: this.error }
         });
     }
 }

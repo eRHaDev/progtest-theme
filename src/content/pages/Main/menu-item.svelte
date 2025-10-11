@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { MenuItem } from "../Main";
+    import type { MenuItem } from "./Main.ts";
     import cx from "classnames";
 
     export let data: MenuItem;
@@ -15,9 +15,7 @@
         {/if}
     </a>
     {#if data.subjectHomepage}
-        <a class="subject-homepage" href={data.subjectHomepage}
-            >Stránky předmětu</a
-        >
+        <a class="subject-homepage" href={data.subjectHomepage}>Stránky předmětu</a>
     {/if}
 </article>
 

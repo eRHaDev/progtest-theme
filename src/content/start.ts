@@ -9,8 +9,7 @@ const setTitle = () => {
 
 const setFavicon = () => {
     const favicon: HTMLLinkElement =
-        document.querySelector("link[rel*='icon']") ||
-        document.createElement("link");
+        document.querySelector("link[rel*='icon']") || document.createElement("link");
     favicon.type = "image/x-icon";
     favicon.rel = "shortcut icon";
     favicon.href = chrome.runtime.getURL("./themes/assets/favicon.ico");
@@ -38,5 +37,5 @@ chrome.runtime.sendMessage(
 
         setTitle();
         setTimeout(setFavicon, 0);
-    },
+    }
 );

@@ -1,23 +1,21 @@
 import minimist from "minimist";
-import { CHROME_MANIFEST, FIREFOX_MANIFEST } from "./constants";
 import { format, resolveConfig } from "prettier";
+
+import { CHROME_MANIFEST, FIREFOX_MANIFEST } from "./constants";
 
 async function writeFormattedJson<Data>(
     filePath: string,
-    content: Data extends object ? Data : never,
+    content: Data extends object ? Data : never
 ) {
     const prettierConfig = await resolveConfig(filePath);
     const output = await format(JSON.stringify(content), {
         parser: "json",
-        ...prettierConfig,
+        ...prettierConfig
     });
     Bun.write(filePath, output);
 }
 
-async function incrementVersionInFile(
-    filePath: string,
-    type: "major" | "minor" | "patch",
-) {
+async function incrementVersionInFile(filePath: string, type: "major" | "minor" | "patch") {
     const file = Bun.file(filePath);
     const content = await file.json();
     const version = content.version as string;
@@ -47,7 +45,7 @@ async function addUpdateToList(updateFile: string) {
 
     const updateEntry = {
         version,
-        update_link: `https://github.com/keombre/progtest-theme/releases/download/${version}/progtest_themes-${version}-an+fx.xpi`,
+        update_link: `https://github.com/keombre/progtest-theme/releases/download/${version}/progtest_themes-${version}-an+fx.xpi`
     };
 
     const updateJson = await Bun.file(updateFile).json();
@@ -68,21 +66,17 @@ async function main() {
         default: {
             major: false,
             minor: false,
-            patch: false,
-        },
+            patch: false
+        }
     });
 
-    if (
-        (args.major && args.minor) ||
-        (args.major && args.patch) ||
-        (args.minor && args.patch)
-    ) {
+    if ((args.major && args.minor) || (args.major && args.patch) || (args.minor && args.patch)) {
         throw new Error("Cannot increment multiple numbers at the same time");
     }
 
     if (!args.major && !args.minor && !args.patch) {
         throw new Error(
-            "Must specify a version increment type ('--major', '--minor', or '--patch')",
+            "Must specify a version increment type ('--major', '--minor', or '--patch')"
         );
     }
 
@@ -92,7 +86,7 @@ async function main() {
         CHROME_MANIFEST,
         FIREFOX_MANIFEST,
         "./manifests/debug.json",
-        "./package.json",
+        "./package.json"
     ]) {
         await incrementVersionInFile(file, type);
     }

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { DEFAULT_SETTINGS, ExtensionSettings } from "../settings";
+    import { DEFAULT_SETTINGS } from "../settings.ts";
+    import type { ExtensionSettings } from "../settings.ts";
     import packageJson from "../../package.json";
     import { slide } from "svelte/transition";
     import Button from "../components/button.svelte";
@@ -21,15 +22,13 @@
         hasPermissions = await chrome.permissions.contains({
             origins: [
                 "https://progtest.fit.cvut.cz/*",
-                "https://courses.fit.cvut.cz/data/courses-all.json",
-            ],
+                "https://courses.fit.cvut.cz/data/courses-all.json"
+            ]
         });
         console.log("Permission check", hasPermissions);
 
         // explicit click listener needed because Firefox is dumb
-        document
-            .getElementById("permissionBtn")
-            ?.addEventListener("click", grantPermissions);
+        document.getElementById("permissionBtn")?.addEventListener("click", grantPermissions);
     });
 
     function handleSubmit() {
@@ -57,8 +56,8 @@
                 .request({
                     origins: [
                         "https://progtest.fit.cvut.cz/*",
-                        "https://courses.fit.cvut.cz/data/courses-all.json",
-                    ],
+                        "https://courses.fit.cvut.cz/data/courses-all.json"
+                    ]
                 })
                 .then((granted) => {
                     if (granted) {
@@ -95,11 +94,7 @@
         border-bottom: 1px solid var(--divider-color);
     "
         >
-            <img
-                src="../themes/assets/favicon.ico"
-                alt="Progtest"
-                style="width: 24px;"
-            />
+            <img src="../themes/assets/favicon.ico" alt="Progtest" style="width: 24px;" />
             <p style="line-height: 20px;">Themes</p>
         </div>
 
@@ -118,16 +113,11 @@
                 align-items: center;
             "
                 >
-                    <iconify-icon
-                        icon="tabler:palette"
-                        style="width: 16px; display: block;"
+                    <iconify-icon icon="tabler:palette" style="width: 16px; display: block;"
                     ></iconify-icon>
                     <p style="font-weight: 500;">Select your theme</p>
                 </div>
-                <select
-                    bind:value={settings.theme}
-                    style="padding: 2px 4px; border-radius: 4px;"
-                >
+                <select bind:value={settings.theme} style="padding: 2px 4px; border-radius: 4px;">
                     <option value="orig">Original</option>
                     <option value="orig-dark">Original Dark</option>
                     <option value="light">Light</option>
@@ -154,9 +144,7 @@
                     align-items: center;
                 "
                     >
-                        <iconify-icon
-                            icon="tabler:settings"
-                            style="width: 16px; display: block;"
+                        <iconify-icon icon="tabler:settings" style="width: 16px; display: block;"
                         ></iconify-icon>
                         <p style="font-weight: 500;">Theme settings</p>
                     </div>
@@ -168,31 +156,19 @@
                 "
                     >
                         <label style="display: block">
-                            <input
-                                type="checkbox"
-                                bind:checked={settings.autohideResults}
-                            />
+                            <input type="checkbox" bind:checked={settings.autohideResults} />
                             Autohide results
                         </label>
                         <label style="display: block">
-                            <input
-                                type="checkbox"
-                                bind:checked={settings.showNotifications}
-                            />
+                            <input type="checkbox" bind:checked={settings.showNotifications} />
                             Show notifications
                         </label>
                         <label style="display: block">
-                            <input
-                                type="checkbox"
-                                bind:checked={settings.syntaxHighlighting}
-                            />
+                            <input type="checkbox" bind:checked={settings.syntaxHighlighting} />
                             Syntax highlighting
                         </label>
                         <label style="display: block">
-                            <input
-                                type="checkbox"
-                                bind:checked={settings.playSounds}
-                            />
+                            <input type="checkbox" bind:checked={settings.playSounds} />
                             Play sounds
                         </label>
                     </div>
@@ -274,17 +250,13 @@
         border-bottom: 1px solid var(--divider-color);
     "
             >
-                <img
-                    src="../themes/assets/favicon.ico"
-                    alt="Progtest"
-                    style="width: 24px;"
-                />
+                <img src="../themes/assets/favicon.ico" alt="Progtest" style="width: 24px;" />
                 <p style="line-height: 20px;">Themes</p>
             </div>
             <p>This extension allows you to change the look of Progtest.</p>
             <p>
-                For the extension to work properly, please grant it permissions
-                to access the following sites:
+                For the extension to work properly, please grant it permissions to access the
+                following sites:
             </p>
             <ul style="flex-grow: 1;">
                 <li>

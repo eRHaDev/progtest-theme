@@ -1,7 +1,8 @@
-import { BUILD_DIR, ENTRYPOINTS, SRC_DIR } from "./constants";
 import { cp, mkdir, rm } from "fs/promises";
-import { copyDirectory } from "./utils";
+
+import { BUILD_DIR, ENTRYPOINTS, SRC_DIR } from "./constants";
 import { sveltePlugin } from "./sveltePlugin";
+import { copyDirectory } from "./utils";
 
 export async function build(options: { verbose: boolean; clean: boolean }) {
     if (options.clean) {
@@ -20,7 +21,7 @@ export async function build(options: { verbose: boolean; clean: boolean }) {
     const buildOutput = await Bun.build({
         entrypoints: Array(...ENTRYPOINTS),
         outdir: BUILD_DIR,
-        plugins: [sveltePlugin],
+        plugins: [sveltePlugin]
     });
     if (!buildOutput.success) {
         console.error("Build failed:", buildOutput);
@@ -31,19 +32,15 @@ export async function build(options: { verbose: boolean; clean: boolean }) {
     console.log("Copying other files");
     await copyDirectory(SRC_DIR, BUILD_DIR, {
         filter: (path) => {
-            return !(
-                path.endsWith(".js") ||
-                path.endsWith(".ts") ||
-                path.endsWith(".svelte")
-            );
+            return !(path.endsWith(".js") || path.endsWith(".ts") || path.endsWith(".svelte"));
         },
-        verbose: options.verbose,
+        verbose: options.verbose
     });
 
     for (const path of [
         "./node_modules/normalize.css/normalize.css",
         "./node_modules/iconify-icon/dist/iconify-icon.min.js",
-        "./node_modules/@highlightjs/cdn-assets/highlight.min.js",
+        "./node_modules/@highlightjs/cdn-assets/highlight.min.js"
     ]) {
         await cp(path, `${BUILD_DIR}/external/${path.split("/").pop()}`);
     }

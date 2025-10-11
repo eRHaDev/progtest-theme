@@ -11,5 +11,5 @@ export const DEFAULT_SETTINGS: ExtensionSettings = {
     autohideResults: true,
     showNotifications: true,
     syntaxHighlighting: true,
-    playSounds: true,
+    playSounds: true
 } as const;

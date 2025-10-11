@@ -19,17 +19,15 @@ export class Login implements Page {
             const uniselect = document.createElement("div");
             uniselect.id = "uniSel";
 
-            document
-                .querySelector("select[name=UID_UNIVERSITY]")
-                ?.childNodes.forEach((e) => {
-                    if (!(e instanceof HTMLOptionElement)) return;
-                    const uni = document.createElement("div");
-                    uni.innerText = e.innerText;
-                    uni.setAttribute("uni", e.value);
-                    uni.className = "uniVal";
-                    uni.addEventListener("click", uniChange);
-                    uniselect.appendChild(uni);
-                });
+            document.querySelector("select[name=UID_UNIVERSITY]")?.childNodes.forEach((e) => {
+                if (!(e instanceof HTMLOptionElement)) return;
+                const uni = document.createElement("div");
+                uni.innerText = e.innerText;
+                uni.setAttribute("uni", e.value);
+                uni.className = "uniVal";
+                uni.addEventListener("click", uniChange);
+                uniselect.appendChild(uni);
+            });
 
             uniselect.children[0].setAttribute("active", "true");
 
@@ -37,9 +35,7 @@ export class Login implements Page {
 
             // add title mover
             document
-                .querySelectorAll(
-                    ".loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b",
-                )
+                .querySelectorAll(".loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b")
                 .forEach((e: Element) => {
                     if (!(e instanceof HTMLElement)) return;
 
@@ -47,9 +43,7 @@ export class Login implements Page {
                 });
 
             document
-                .querySelectorAll(
-                    ".loginForm :is(#ldap1, #ldap2, #ldap3) input",
-                )
+                .querySelectorAll(".loginForm :is(#ldap1, #ldap2, #ldap3) input")
                 .forEach((e: Element) => {
                     if (!(e instanceof HTMLInputElement)) return;
 
@@ -63,9 +57,7 @@ export class Login implements Page {
             // in firefox, when opening the page, load the selected login type
             // @ts-expect-error browser is only defined in Chrome and thus is not in types as a global variable
             if (typeof browser !== "undefined") {
-                document
-                    .querySelector<HTMLElement>("#uniSel > .uniVal")
-                    ?.click();
+                document.querySelector<HTMLElement>("#uniSel > .uniVal")?.click();
             }
         }
     }
@@ -90,9 +82,7 @@ export const loginFocusOut = (event: FocusEvent) => {
         return;
     }
     if (target?.value == "") {
-        target.parentNode?.parentNode?.children[0].children[0].removeAttribute(
-            "moved",
-        );
+        target.parentNode?.parentNode?.children[0].children[0].removeAttribute("moved");
     }
 };
 
@@ -127,9 +117,7 @@ export const uniChange = (event: MouseEvent) => {
 
     target?.setAttribute("active", "true");
 
-    const select = document.querySelector<HTMLSelectElement>(
-        'select[name="UID_UNIVERSITY"]',
-    );
+    const select = document.querySelector<HTMLSelectElement>('select[name="UID_UNIVERSITY"]');
     if (select) {
         select.selectedIndex = i;
         const trigger = new Event("change");

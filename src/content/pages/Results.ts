@@ -1,4 +1,5 @@
 import { ExtensionSettings } from "../../settings";
+
 import { Logged } from "./Logged";
 
 export class Results extends Logged {

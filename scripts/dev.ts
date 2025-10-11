@@ -1,7 +1,7 @@
 import Reloader from "advanced-extension-reloader-watch-2/es/reloader";
-
 import { watch } from "fs";
 import { cp } from "fs/promises";
+
 import { build } from "./build";
 import { walkDir } from "./utils";
 
@@ -21,7 +21,7 @@ build({ verbose: false, clean: true })
         };
 
         const reloader = new Reloader({
-            port: 7220,
+            port: 7220
         });
 
         const onChange = async (eventType: string, filename: string | null) => {
@@ -43,7 +43,7 @@ build({ verbose: false, clean: true })
             }
             await additionalDevSteps();
             reloader.reload({
-                extension_id: process.env.EXTENSION_ID,
+                extension_id: process.env.EXTENSION_ID
             });
 
             console.log("Extension rebuilt");
@@ -51,7 +51,7 @@ build({ verbose: false, clean: true })
 
         const watchers = [
             watch("./src/", { recursive: true }, onChange),
-            watch("./manifests/", { recursive: true }, onChange),
+            watch("./manifests/", { recursive: true }, onChange)
         ];
         process.on("SIGINT", exit);
         console.log("Watching for changes...");
@@ -79,18 +79,13 @@ build({ verbose: false, clean: true })
 
                         const url = new URL("/index.php", req.url);
                         url.searchParams.set("X", folderName);
-                        url.searchParams.set(
-                            "Cou",
-                            fileName.replace(".html", ""),
-                        );
+                        url.searchParams.set("Cou", fileName.replace(".html", ""));
 
                         pages.push({
                             url: url.toString(),
-                            description: description.includes(
-                                'xml version="1.0" encoding="utf-8"',
-                            )
+                            description: description.includes('xml version="1.0" encoding="utf-8"')
                                 ? filePath
-                                : description,
+                                : description
                         });
                     }
                     return Response.json(pages);
@@ -104,9 +99,9 @@ build({ verbose: false, clean: true })
                     return new Response(
                         Bun.file(
                             `./test_pages/${url.searchParams.get(
-                                "X",
-                            )}/${url.searchParams.get("Cou")}.html`,
-                        ),
+                                "X"
+                            )}/${url.searchParams.get("Cou")}.html`
+                        )
                     );
                 }
                 if (url.pathname.endsWith("css.css")) {
@@ -122,7 +117,7 @@ build({ verbose: false, clean: true })
                 }
 
                 return new Response(Bun.file(`./build/${url.pathname}`));
-            },
+            }
         });
         console.log(`Dev server running on http://localhost:${server.port}/`);
     });

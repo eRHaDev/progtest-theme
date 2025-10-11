@@ -23,6 +23,7 @@
         "skipLibCheck": true,
         "composite": true,
         "downlevelIteration": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "verbatimModuleSyntax": true
     }
 }
