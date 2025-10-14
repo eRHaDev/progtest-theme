@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { isToday } from "./Course.ts";
     import type { CourseGroup, CourseItem } from "./Course.ts";
+    import { isToday } from "./Course.ts";
     import cx from "classnames";
 
     export let group: CourseGroup;
@@ -22,10 +22,11 @@
         entries.reduce((acc, curr) => acc + (curr.score ?? 0), 0);
 
     const onEntryClick = (event: MouseEvent, entry: CourseItem) => {
-        if (!entry.link || entry.link.startsWith("javascript:")) {
-            event.preventDefault();
-            return false;
-        }
+        // TODO: Add modal
+        // if (!entry.link || entry.link.startsWith("javascript:")) {
+        //     event.preventDefault();
+        //     return false;
+        // }
         if (entry.type === "task") {
             return onTaskClick(event, entry);
         }
