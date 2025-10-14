@@ -210,8 +210,8 @@ select[name="UID_UNIVERSITY"] {
 
 #langGlobe {
     position: absolute;
-    bottom: 2px;
-    right: 15px;
+    right: 28px;
+    top: 3px;
     z-index: -1;
 }
 
@@ -291,7 +291,7 @@ select[name="UID_UNIVERSITY"] {
 
 .loginForm .insBox > table > tbody > tr:nth-child(1) {
     position: absolute;
-    left: -100px;
+    left: -110px;
     top: 40px;
 }
 
