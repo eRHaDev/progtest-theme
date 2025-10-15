@@ -99,7 +99,7 @@ export class Main extends Logged {
             subjects[semesterKey] ??= [];
             subjects[semesterKey].push({
                 title: item.title,
-                text: item.text.substring(0, item.text.indexOf("(")),
+                text: item.text.substring(0, item.text.indexOf("(")) || item.text,
                 icon,
                 link: item.link,
                 subjectHomepage,
@@ -124,9 +124,10 @@ function parseItems(): ParsedItem[] {
             const link = subject.querySelector("a");
             const name = subject.querySelector("span");
             const title = subject.nextElementSibling?.querySelector("span");
+
             items.push({
-                title: name?.innerText ?? "",
-                text: title?.innerText ?? "",
+                title: name?.textContent ?? "",
+                text: title?.textContent ?? "",
                 link: link?.href ?? "",
                 semester: semester.querySelector("summary")?.innerText ?? ""
             });
