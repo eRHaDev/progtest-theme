@@ -39,8 +39,7 @@ export async function build(options: { verbose: boolean; clean: boolean }) {
 
     for (const path of [
         "./node_modules/normalize.css/normalize.css",
-        "./node_modules/iconify-icon/dist/iconify-icon.min.js",
-        "./node_modules/@highlightjs/cdn-assets/highlight.min.js"
+        "./node_modules/iconify-icon/dist/iconify-icon.min.js"
     ]) {
         await cp(path, `${BUILD_DIR}/external/${path.split("/").pop()}`);
     }

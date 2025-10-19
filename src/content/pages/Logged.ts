@@ -1,3 +1,5 @@
+import hljs from "highlight.js";
+
 import type { ExtensionSettings } from "../../settings";
 
 import type { Page } from "./Page";
@@ -120,7 +122,7 @@ export class Logged implements Page {
                 if (this.settings.syntaxHighlighting) {
                     block.innerHTML = block.textContent || block.innerText || "";
 
-                    window.hljs.highlightElement(block);
+                    hljs.highlightElement(block);
                 } else {
                     block.classList.add("hljs");
                 }
