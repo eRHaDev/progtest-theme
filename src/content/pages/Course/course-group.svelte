@@ -42,8 +42,9 @@
                     href={entry.link}
                     class={cx("course_link", `course_link_type_${entry.type}`, {
                         course_disabled: entry.disabled,
+                        course_not_started: entry.opens && new Date() > entry.opens && entry.score === 0,
                         course_deadline_today:
-                            entry.closes && isToday(entry.closes) && entry.score === 0
+                            entry.closes && isToday(entry.closes) && entry.score === 0,
                     })}
                     on:click={(event) => onEntryClick(event, entry)}
                 >
@@ -207,6 +208,14 @@
 
     .course_link_type_test.course_link_score_sum {
         background-color: rgba(156, 39, 176, 0.3) !important;
+    }
+
+    .course_not_started {
+        background-color: rgba(232, 110, 53, 0.2) !important;
+    }
+
+    .course_not_started:hover {
+        background-color: rgba(232, 110, 53, 0.25) !important;
     }
 
     .course_deadline_today {
