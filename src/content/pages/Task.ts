@@ -3,6 +3,8 @@ import type { ExtensionSettings } from "../../settings.ts";
 import { Logged } from "./Logged";
 
 export class Task extends Logged {
+    className = "task";
+
     constructor(settings: ExtensionSettings) {
         super(settings);
     }

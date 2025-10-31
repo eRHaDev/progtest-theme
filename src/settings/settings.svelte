@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { DEFAULT_SETTINGS } from "../settings.ts";
     import type { ExtensionSettings } from "../settings.ts";
+    import { DEFAULT_SETTINGS, Theme, ThemeMode } from "../settings.ts";
     import packageJson from "../../package.json";
     import { slide } from "svelte/transition";
     import Button from "../components/button.svelte";
@@ -14,7 +14,7 @@
 
     onMount(async () => {
         if (typeof chrome !== "object") return;
-        chrome.storage.local.get(DEFAULT_SETTINGS, function (localSettings) {
+        chrome.storage.local.get(DEFAULT_SETTINGS, function(localSettings) {
             if (localSettings === undefined) return;
             settings = localSettings as ExtensionSettings;
             console.log("Settings loaded!", settings);
@@ -38,7 +38,7 @@
             if (typeof chrome === "object") {
                 chrome.tabs.reload({ bypassCache: true });
             }
-            setTimeout(function () {
+            setTimeout(function() {
                 showSuccess = false;
             }, 1500);
         };
@@ -118,17 +118,30 @@
                     <p style="font-weight: 500;">Select your theme</p>
                 </div>
                 <select bind:value={settings.theme} style="padding: 2px 4px; border-radius: 4px;">
-                    <option value="orig">Original</option>
-                    <option value="orig-dark">Original Dark</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                    <option value="automatic">Automatic</option>
+                    {#each Object.keys(Theme) as theme (theme)}
+                        <option value={theme}>{theme.charAt(0).toUpperCase() + theme.slice(1).toLowerCase()}</option>
+                    {/each}
+                </select>
+                <div
+                    style="
+                display: flex;
+                gap: 2px;
+                align-items: center;
+            "
+                >
+                    <iconify-icon icon="tabler:palette" style="width: 16px; display: block;"
+                    ></iconify-icon>
+                    <p style="font-weight: 500;">Select theme mode</p>
+                </div>
+                <select bind:value={settings.themeMode} style="padding: 2px 4px; border-radius: 4px;">
+                    {#each Object.keys(ThemeMode) as themeMode (themeMode)}
+                        <option value={themeMode}>{themeMode.charAt(0).toUpperCase() + themeMode.slice(1).toLowerCase()}</option>
+                    {/each}
                 </select>
             </div>
 
-            {#if !["orig", "orig-dark"].includes(settings.theme)}
-                <div
-                    style="
+            <div
+                style="
                 display: flex;
                 flex-direction: column;
                 gap: 8px;
@@ -136,44 +149,43 @@
                 border-top: 1px solid var(--divider-color);
                 padding-top: 12px;
             "
-                >
-                    <div
-                        style="
+            >
+                <div
+                    style="
                     display: flex; 
                     gap: 2px; 
                     align-items: center;
                 "
-                    >
-                        <iconify-icon icon="tabler:settings" style="width: 16px; display: block;"
-                        ></iconify-icon>
-                        <p style="font-weight: 500;">Theme settings</p>
-                    </div>
-                    <div
-                        style="
+                >
+                    <iconify-icon icon="tabler:settings" style="width: 16px; display: block;"
+                    ></iconify-icon>
+                    <p style="font-weight: 500;">Theme settings</p>
+                </div>
+                <div
+                    style="
                     display: flex;
                     flex-direction: column;
                     gap: 4px;
                 "
-                    >
-                        <label style="display: block">
-                            <input type="checkbox" bind:checked={settings.autohideResults} />
-                            Autohide results
-                        </label>
-                        <label style="display: block">
-                            <input type="checkbox" bind:checked={settings.showNotifications} />
-                            Show notifications
-                        </label>
-                        <label style="display: block">
-                            <input type="checkbox" bind:checked={settings.syntaxHighlighting} />
-                            Syntax highlighting
-                        </label>
-                        <label style="display: block">
-                            <input type="checkbox" bind:checked={settings.playSounds} />
-                            Play sounds
-                        </label>
-                    </div>
+                >
+                    <label style="display: block">
+                        <input type="checkbox" bind:checked={settings.autohideResults} />
+                        Autohide results
+                    </label>
+                    <label style="display: block">
+                        <input type="checkbox" bind:checked={settings.showNotifications} />
+                        Show notifications
+                    </label>
+                    <label style="display: block">
+                        <input type="checkbox" bind:checked={settings.syntaxHighlighting} />
+                        Syntax highlighting
+                    </label>
+                    <label style="display: block">
+                        <input type="checkbox" bind:checked={settings.playSounds} />
+                        Play sounds
+                    </label>
                 </div>
-            {/if}
+            </div>
 
             <div
                 style="
@@ -231,7 +243,8 @@
                 <span>Version {version}</span>
             </a>
         </div>
-    {:else}<div
+    {:else}
+        <div
             style="
         display: flex; 
         flex-direction: column; 

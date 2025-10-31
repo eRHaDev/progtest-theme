@@ -3,6 +3,8 @@ import type { ExtensionSettings } from "../../settings";
 import { Logged } from "./Logged";
 
 export class Exam extends Logged {
+    className = "exam";
+
     constructor(settings: ExtensionSettings) {
         super(settings);
     }

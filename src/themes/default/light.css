@@ -1,104 +1,3 @@
-@import "./common.css";
-
-.uniVal {
-    color: #2e2e2e;
-}
-
-#loadWrapper {
-    background: #fff;
-}
-
-#shib1 > td > img {
-    background: none;
-    padding-left: 0;
-}
-
-body {
-    color: #000000;
-    background-color: #fff;
-    background-image: url("./assets/background-light.png");
-}
-
-table {
-    background-color: #fff;
-}
-
-select {
-    outline-color: #2e2e2e;
-}
-
-.app_name {
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
-    color: #464646;
-}
-
-.app_name > b {
-    color: #212121;
-}
-
-.loginForm > center > div > table:before {
-    background: #26a69a;
-}
-
-.loginForm table {
-    background-color: #fff !important;
-}
-
-.loginForm .insBox {
-    background: #fff;
-}
-
-.loginForm div.bUpd input,
-.loginForm div.bLink a {
-    outline-color: #004d40;
-}
-
-.loginForm select[name="lang"] {
-    border-bottom: thin solid rgba(0, 0, 0, 0.25);
-    color: #353535;
-}
-
-#langGlobe {
-    fill: #424242;
-}
-
-.loginForm :is(#ldap1, #ldap2, #ldap3) > td:nth-child(1) > b {
-    color: #585858;
-    background: #fff;
-}
-
-.loginForm input {
-    border-bottom: thin solid rgba(0, 0, 0, 0.3);
-}
-
-/** header */
-
-.navbar {
-    background-color: #343a40 !important;
-}
-
-.navbar > div {
-    background-color: #343a40 !important;
-}
-
-#refProgress {
-    background-color: rgb(255, 193, 7) !important;
-}
-
-.notifications {
-    background: #fff;
-    border-color: #eee;
-}
-
-.notifications > a {
-    color: #000;
-    border-color: #d5d5d5;
-}
-
-.notifications > a:hover {
-    background: #ececec;
-}
-
 /** subject select */
 
 .subject {
@@ -218,8 +117,8 @@ a.course_link:hover {
 }
 
 .modal-spinner {
-    background: url(./assets/spinner.svg),
-        radial-gradient(ellipse at center, #fffa 40%, #fff0 70%);
+    background: url(../assets/spinner.svg),
+    radial-gradient(ellipse at center, #fffa 40%, #fff0 70%);
 }
 
 .mtask-score-my::after {
@@ -237,7 +136,7 @@ table.header {
 }
 
 table {
-    background-color: #fff !important;
+    background-color: #fff;
 }
 
 /** item body */

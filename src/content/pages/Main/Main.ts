@@ -39,6 +39,8 @@ type CoursesInfo = {
 };
 
 export class Main extends Logged {
+    className = "main";
+
     orderC = 1000;
     constructor(settings: ExtensionSettings) {
         super(settings);
@@ -54,14 +56,11 @@ export class Main extends Logged {
         }
 
         // get subject URLs from courses
-        const subjectInfo: CoursesInfo = await fetch(
-            "https://courses.fit.cvut.cz/data/courses-all.json",
-            {
-                method: "GET",
-                mode: "cors",
-                credentials: "omit"
-            }
-        ).then((response) => response.json());
+        const subjectInfo: CoursesInfo = await fetch("https://courses.fit.cvut.cz/data/courses-all.json", {
+            method: "GET",
+            mode: "cors",
+            credentials: "omit"
+        }).then((response) => response.json());
 
         const subjects: Subjects = {};
         const settings: MenuItem[] = [];
@@ -93,8 +92,7 @@ export class Main extends Logged {
                 2
             )}${item.semester.includes("Zimní") ? 1 : 2}`;
             const subjectHomepage =
-                subjectInfo.courses[item.title]?.homepage ??
-                `https://courses.fit.cvut.cz/${item.title}`;
+                subjectInfo.courses[item.title]?.homepage ?? `https://courses.fit.cvut.cz/${item.title}`;
 
             subjects[semesterKey] ??= [];
             subjects[semesterKey].push({

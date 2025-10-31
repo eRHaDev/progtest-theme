@@ -4,7 +4,7 @@
  */
 export default {
     plugins: ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-svelte"],
-    printWidth: 100,
+    printWidth: 120,
     tabWidth: 4,
     semi: true,
     trailingComma: "none",

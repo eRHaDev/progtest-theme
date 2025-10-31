@@ -2,8 +2,6 @@ import hljs from "highlight.js";
 
 import type { ExtensionSettings } from "../../settings";
 
-import type { Page } from "./Page";
-
 interface LoggedTask {
     subject: string;
     link: string;
@@ -11,7 +9,9 @@ interface LoggedTask {
     seen: boolean;
 }
 
-export class Logged implements Page {
+export class Logged implements IPage {
+    className = "logged";
+
     topButton = `
 <svg id="upTop" xmlns="http://www.w3.org/2000/svg" viewBox="-1 -0.5 26 26">
     <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path>
@@ -70,9 +70,7 @@ export class Logged implements Page {
 
         document.addEventListener("click", (e) => {
             if (e.target != bell) {
-                document
-                    .getElementsByClassName("notifications")[0]
-                    .classList.add("notifications-hide");
+                document.getElementsByClassName("notifications")[0].classList.add("notifications-hide");
             }
         });
 
@@ -116,17 +114,15 @@ export class Logged implements Page {
     }
 
     highlightCode() {
-        document
-            .querySelectorAll<HTMLElement>("pre:not(.hljs), code:not(.hljs), tt:not(.hjls)")
-            .forEach((block) => {
-                if (this.settings.syntaxHighlighting) {
-                    block.innerHTML = block.textContent || block.innerText || "";
+        document.querySelectorAll<HTMLElement>("pre:not(.hljs), code:not(.hljs), tt:not(.hjls)").forEach((block) => {
+            if (this.settings.syntaxHighlighting) {
+                block.innerHTML = block.textContent || block.innerText || "";
 
-                    hljs.highlightElement(block);
-                } else {
-                    block.classList.add("hljs");
-                }
-            });
+                hljs.highlightElement(block);
+            } else {
+                block.classList.add("hljs");
+            }
+        });
     }
 
     async notifications() {
@@ -149,9 +145,7 @@ export class Logged implements Page {
                 tasks?.filter((t) => {
                     return !localTasks.some((e) => e.link === t.link);
                 }) ?? [];
-            this.displayNotifications(
-                notify?.concat(localTasks.filter((e) => e.seen == false)) ?? []
-            );
+            this.displayNotifications(notify?.concat(localTasks.filter((e) => e.seen == false)) ?? []);
             localStorage.tasks = JSON.stringify(localTasks.concat(notify));
         }
     }
@@ -213,8 +207,9 @@ export class Logged implements Page {
 
             taskLinks.forEach((f) => {
                 const url = new URL(f.href);
-                const name = (f.parentNode?.parentNode?.parentNode?.parentNode?.firstElementChild ||
-                    undefined) as HTMLElement | undefined;
+                const name = (f.parentNode?.parentNode?.parentNode?.parentNode?.firstElementChild || undefined) as
+                    | HTMLElement
+                    | undefined;
                 if (!name) {
                     return;
                 }

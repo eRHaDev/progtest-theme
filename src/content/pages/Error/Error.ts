@@ -1,8 +1,8 @@
-import type { Page } from "../Page";
-
 import ErrorComponent from "./Error.svelte";
 
-export class ErrorPage implements Page {
+export class ErrorPage implements IPage {
+    className = "error";
+
     constructor(private error: Error) {}
 
     async initialise() {

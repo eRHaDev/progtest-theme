@@ -3,6 +3,8 @@ import type { ExtensionSettings } from "../../settings";
 import { Logged } from "./Logged";
 
 export class Results extends Logged {
+    className = "results";
+
     constructor(settings: ExtensionSettings) {
         super(settings);
     }
@@ -35,9 +37,7 @@ export class Results extends Logged {
             c.shift();
             c.forEach((e) => {
                 styles +=
-                    "tbody > tr > td:nth-child(" +
-                    (e + 1) +
-                    ") {border-left: thin solid #aaa;font-weight: bold;}";
+                    "tbody > tr > td:nth-child(" + (e + 1) + ") {border-left: thin solid #aaa;font-weight: bold;}";
             });
 
             styles += "tr > td:last-child {font-weight: bold;}";

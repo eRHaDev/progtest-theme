@@ -1,5 +1,16 @@
+export enum Theme {
+    DEFAULT = "DEFAULT"
+}
+
+export enum ThemeMode {
+    AUTO = "AUTO",
+    LIGHT = "LIGHT",
+    DARK = "DARK"
+}
+
 export interface ExtensionSettings {
-    theme: "automatic" | "orig" | "orig-dark" | "dark" | "light";
+    theme: Theme;
+    themeMode: ThemeMode;
     autohideResults: boolean;
     showNotifications: boolean;
     syntaxHighlighting: boolean;
@@ -7,7 +18,8 @@ export interface ExtensionSettings {
 }
 
 export const DEFAULT_SETTINGS: ExtensionSettings = {
-    theme: "automatic",
+    theme: Theme.DEFAULT,
+    themeMode: ThemeMode.AUTO,
     autohideResults: true,
     showNotifications: true,
     syntaxHighlighting: true,

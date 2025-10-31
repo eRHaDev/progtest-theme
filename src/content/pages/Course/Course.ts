@@ -21,6 +21,8 @@ export interface CourseGroup {
 }
 
 export class Course extends Logged {
+    className = "course";
+
     constructor(settings: ExtensionSettings) {
         super(settings);
     }
@@ -73,20 +75,15 @@ export async function GetTasks() {
                 quiz: "test",
                 extra: "extra"
             }[
-                f
-                    .querySelector<HTMLImageElement>("[class*='bigBut'] img")
-                    ?.src.split("/")
-                    .pop()
-                    ?.split(".")
-                    .shift() ?? ""
+                f.querySelector<HTMLImageElement>("[class*='bigBut'] img")?.src.split("/").pop()?.split(".").shift() ??
+                    ""
             ];
 
             if (type == "test" && name?.toLowerCase().includes("demo")) {
                 type = "test-demo";
             }
 
-            const link: string | undefined =
-                f.querySelector<HTMLAnchorElement>(":scope > div a")?.href;
+            const link: string | undefined = f.querySelector<HTMLAnchorElement>(":scope > div a")?.href;
             const disabled: boolean = link === undefined;
             let score: number | undefined | null;
             let opens: Date | undefined;
@@ -139,11 +136,7 @@ export async function GetTasks() {
 
 export function isToday(d: Date) {
     const today = new Date();
-    return (
-        d.getDate() == today.getDate() &&
-        d.getMonth() == today.getMonth() &&
-        d.getFullYear() == today.getFullYear()
-    );
+    return d.getDate() == today.getDate() && d.getMonth() == today.getMonth() && d.getFullYear() == today.getFullYear();
 }
 
 /**
@@ -243,17 +236,11 @@ function parseItemInfo(document: Document): TaskItemInfo {
                 break;
             case "Pozdní odevzdání s penalizací:":
                 lateDeadline = textToDate(value.querySelector("b")?.textContent ?? "");
-                lateDeadlineInfo = value.textContent
-                    ?.replace(value.querySelector("b")?.textContent ?? "", "")
-                    .trim();
+                lateDeadlineInfo = value.textContent?.replace(value.querySelector("b")?.textContent ?? "", "").trim();
                 break;
             case "Hodnocení:":
-                [score, scoreMax] = (value.querySelector("b")?.textContent?.split("/") ?? []).map(
-                    parseFloat
-                );
-                scoreInfo = value.textContent
-                    ?.replace(value.querySelector("b")?.textContent ?? "", "")
-                    .trim();
+                [score, scoreMax] = (value.querySelector("b")?.textContent?.split("/") ?? []).map(parseFloat);
+                scoreInfo = value.textContent?.replace(value.querySelector("b")?.textContent ?? "", "").trim();
                 break;
         }
     });
@@ -292,14 +279,10 @@ function parseItemTasks(document: Document): TaskItemTask[] {
         if (i === 0) return;
 
         const title = val.querySelector("tbody > tr:nth-child(1) > td:nth-child(2)")?.textContent;
-        const link = val.querySelector<HTMLAnchorElement>(
-            "tbody > tr:last-child a:last-child"
-        )?.href;
+        const link = val.querySelector<HTMLAnchorElement>("tbody > tr:last-child a:last-child")?.href;
         const text = val.querySelector("tbody > tr:nth-child(4) > td")?.textContent?.trim();
 
-        const submissionsText = val.querySelector(
-            "tbody > tr:nth-child(2) > td:nth-child(2)"
-        )?.textContent;
+        const submissionsText = val.querySelector("tbody > tr:nth-child(2) > td:nth-child(2)")?.textContent;
 
         const [submissions = null, submissionsMax = null, submissionsWithPenalty = null] = (
             submissionsText?.split("/") ?? []
@@ -313,9 +296,7 @@ function parseItemTasks(document: Document): TaskItemTask[] {
                 return parseInt(s);
             });
 
-        const scoreText = val.querySelector(
-            "tbody > tr:nth-child(3) > td:nth-child(2)"
-        )?.textContent;
+        const scoreText = val.querySelector("tbody > tr:nth-child(3) > td:nth-child(2)")?.textContent;
         const [score, scoreMax] = (scoreText?.split("/") ?? []).map(parseFloat);
 
         if (!title || !link || !text) {
