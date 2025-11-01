@@ -7,7 +7,7 @@
         {
             "run_at": "document_start",
             "js": ["content/start.js"],
-            "css": ["themes/loading/on.css"],
+            "css": ["themes/assets/icons/*.css"],
             "matches": ["https://progtest.fit.cvut.cz/*"],
             "all_frames": true
         },

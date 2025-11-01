@@ -6,12 +6,12 @@
     let isVisible = false;
 
     function showLoader() {
-        console.log("showLoader");
+        document.getElementsByTagName("body")[0].classList.add("ptt-loading");
         isVisible = true;
     }
 
     function hideLoader() {
-        console.log("hideLoader");
+        document.getElementsByTagName("body")[0].classList.remove("ptt-loading");
         isVisible = false;
     }
 

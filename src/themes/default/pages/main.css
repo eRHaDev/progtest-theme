@@ -1,0 +1,54 @@
+body.ptt-main {
+
+    .icon-aag {
+        background-image: url("../assets/icons/aag.svg");
+    }
+
+    .icon-ag1 {
+        background-image: url("../assets/icons/ag1.svg");
+    }
+
+    .icon-osy {
+        background-image: url("../assets/icons/osy.svg");
+    }
+
+    .icon-pa1 {
+        background-image: url("../assets/icons/pa1.svg");
+    }
+
+    .icon-pa2 {
+        background-image: url("../assets/icons/pa2.svg");
+    }
+
+    .icon-pdp {
+        background-image: url("../assets/icons/pdp.svg");
+    }
+
+    .icon-pjv {
+        background-image: url("../assets/icons/pjv.svg");
+    }
+
+    .icon-ps1 {
+        background-image: url("../assets/icons/ps1.svg");
+    }
+
+    .icon-pyt {
+        background-image: url("../assets/icons/pyt.svg");
+    }
+
+    .icon-setting {
+        background-image: url("../assets/icons/settings.svg");
+    }
+
+    .icon-faq {
+        background-image: url("../assets/icons/faq.svg");
+    }
+
+    .icon-compile {
+        background-image: url("../assets/icons/compile.svg");
+    }
+
+    .icon-unknown {
+        background-image: url("../assets/icons/unknown.svg");
+    }
+}

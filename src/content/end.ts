@@ -78,21 +78,9 @@ const replaceStyles = (settings: ExtensionSettings) => {
     });
 };
 
-const addLoadingOffStyle = () => {
-    const link = document.createElement("link");
-    link.setAttribute("rel", "stylesheet");
-    link.setAttribute("type", "text/css");
-
-    link.setAttribute("href", chrome.runtime.getURL("themes/loading/off.css"));
-    document.getElementsByTagName("head")[0].appendChild(link);
-    return new Promise((resolve) => {
-        link.onload = resolve;
-    });
-};
-
 chrome.runtime.sendMessage({ type: MessageType.GET_SETTINGS }, async (settings: ExtensionSettings) => {
     await replaceStyles(settings);
     await main(settings);
-    await addLoadingOffStyle();
+
     document.dispatchEvent(pttLoadedEvent);
 });
