@@ -7,7 +7,6 @@
         {
             "run_at": "document_start",
             "js": ["content/start.js"],
-            "css": ["themes/assets/icons/*.css"],
             "matches": ["https://progtest.fit.cvut.cz/*", "http://ptmock.localhost/*"],
             "all_frames": true
         },

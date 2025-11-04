@@ -7,7 +7,7 @@
 <article>
     <a href={data.link} class="subject">
         <div class="subject-title">{data.title}</div>
-        <div class="icon" style="background-image: url('themes/assets/icons/{data.icon}.svg')"></div>
+        <div class="icon" style='background-image: url("{data.icon}")'></div>
         <div class="subject-body">{data.text}</div>
         {#if data.footer}
             <div class="subject-footer">{data.footer}</div>

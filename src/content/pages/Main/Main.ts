@@ -137,20 +137,15 @@ function parseItems(): ParsedItem[] {
 }
 
 function getMenuIcon(title: string) {
-    return (
+    const iconName = (
         {
-            "BI-AAG": "icon-aag",
-            "BI-AG1": "icon-ag1",
-            "BI-OSY": "icon-osy",
-            "BI-PA1": "icon-pa1",
-            "BI-PA2": "icon-pa2",
-            "BI-PJV": "icon-pjv",
-            "BI-PS1": "icon-ps1",
-            "BI-PYT": "icon-pyt",
-            "NI-PDP": "icon-pdp",
-            Nastavení: "icon-setting",
-            Překladače: "icon-compile",
-            FAQ: "icon-faq"
-        }[title] || "icon-unknown"
+            Nastavení: "settings",
+            Překladače: "compile",
+            FAQ: "faq"
+        }[title] || title.toLowerCase()
+            .replace("bi-", "")
+            .replace("ni-", "")
     );
+
+    return chrome.runtime.getURL("themes/assets/icons/" + iconName + ".svg");
 }
