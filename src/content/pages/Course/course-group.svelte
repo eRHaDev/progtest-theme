@@ -42,9 +42,9 @@
                     href={entry.link}
                     class={cx("course_link", `course_link_type_${entry.type}`, {
                         course_disabled: entry.disabled,
-                        course_not_started: entry.opens && new Date() > entry.opens && entry.score === 0,
+                        course_not_started: entry.opens && new Date() > entry.opens && !entry.score,
                         course_deadline_today:
-                            entry.closes && isToday(entry.closes) && entry.score === 0,
+                            entry.closes && isToday(entry.closes) && !entry.score,
                     })}
                     on:click={(event) => onEntryClick(event, entry)}
                 >

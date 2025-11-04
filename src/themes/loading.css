@@ -1,4 +1,4 @@
-body.ptt-loading::before {
+body:not(.ptt-loaded)::before {
     content: "";
     display: block;
     position: fixed;
@@ -10,7 +10,7 @@ body.ptt-loading::before {
     z-index: 100;
 }
 
-body:not(.ptt-loading)::before {
+body.ptt-loaded::before {
     display: none !important;
     position: relative !important;
 }
