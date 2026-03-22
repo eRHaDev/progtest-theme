@@ -239,8 +239,13 @@ function parseItemInfo(document: Document): TaskItemInfo {
                 lateDeadlineInfo = value.textContent?.replace(value.querySelector("b")?.textContent ?? "", "").trim();
                 break;
             case "Hodnocení:":
-                [score, scoreMax] = (value.querySelector("b")?.textContent?.split("/") ?? []).map(parseFloat);
+                const floats = value?.textContent?.match(/\d+\.\d+/g);
+
                 scoreInfo = value.textContent?.replace(value.querySelector("b")?.textContent ?? "", "").trim();
+                if (floats && floats.length >= 2) {
+                    score = parseFloat(floats[0]);
+                    scoreMax = parseFloat(floats[1]);
+                }
                 break;
         }
     });
