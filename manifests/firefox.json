@@ -30,10 +30,7 @@
     ],
     "background": { "scripts": ["background.js"] },
     "permissions": ["storage", "tabs"],
-    "host_permissions": [
-        "https://progtest.fit.cvut.cz/*",
-        "https://courses.fit.cvut.cz/data/courses-all.json"
-    ],
+    "host_permissions": ["https://progtest.fit.cvut.cz/*", "https://courses.fit.cvut.cz/data/courses-all.json"],
     "action": {
         "default_title": "",
         "default_icon": "icon.png",
@@ -43,7 +40,7 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "progtest-themes@keombre",
-            "update_url": "https://raw.githubusercontent.com/keombre/progtest-theme/stable/update.json"
+            "update_url": "https://raw.githubusercontent.com/progtest-theme/progtest-theme/stable/update.json"
         }
     }
 }

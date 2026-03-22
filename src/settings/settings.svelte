@@ -228,7 +228,7 @@
         >
             <a
                 class="version"
-                href="https://github.com/keombre/progtest-theme"
+                href="https://github.com/progtest-theme/progtest-theme"
                 target="_blank"
                 style="
             display: inline-flex; 

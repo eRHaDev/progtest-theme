@@ -15,14 +15,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/keombre/progtest-theme.git"
+        "url": "git+https://github.com/progtest-theme/progtest-theme.git"
     },
     "author": "keombre",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/keombre/progtest-theme/issues"
+        "url": "https://github.com/progtest-theme/progtest-theme/issues"
     },
-    "homepage": "https://github.com/keombre/progtest-theme",
+    "homepage": "https://github.com/progtest-theme/progtest-theme",
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
