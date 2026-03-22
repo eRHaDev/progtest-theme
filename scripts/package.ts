@@ -31,10 +31,9 @@ async function signFirefox() {
             artifactsDir: FIREFOX_DIST_DIR,
             apiKey: process.env.WEB_EXT_API_KEY,
             apiSecret: process.env.WEB_EXT_API_SECRET,
-            channel: "unlisted"
-            /** upcoming Mozilla API */
-            // useSubmissionApi: true,
-            // amoBaseUrl: "https://addons.mozilla.org/api/v5",
+            channel: "unlisted",
+            amoBaseUrl: "https://addons.mozilla.org/api/v5",
+            useSubmissionApi: true
         },
         { shouldExitProgram: false }
     );
@@ -45,44 +44,31 @@ async function packChrome(useSystemUtilities: boolean) {
     pack(CHROME_DIST_DIR, useSystemUtilities);
 }
 
-async function packFirefox(useSystemUtilities: boolean) {
-    cp(FIREFOX_MANIFEST, MANIFEST_TARGET);
-    pack(FIREFOX_DIST_DIR, useSystemUtilities);
-}
-
 async function main() {
     const args = minimist(process.argv.slice(2), {
-        boolean: ["chrome", "firefox", "sign", "system"],
+        boolean: ["chrome", "firefox", "system"],
         default: {
             chrome: false,
             firefox: false,
-            sign: false,
             system: false
         }
     });
 
     if (args.chrome) {
-        if (args.sign) {
-            throw new Error("Cannot sign Chrome extension");
-        }
         await packChrome(args.system);
         return;
     }
 
     if (args.firefox) {
-        if (args.sign) {
-            if (args.system) {
-                throw new Error("System utilities cannot be used with signing");
-            }
-            await signFirefox();
-        } else {
-            await packFirefox(args.system);
+        if (args.system) {
+            throw new Error("System utilities cannot be used with firefox signing");
         }
+        await signFirefox();
+
         return;
     }
 
     console.log("Use '--chrome' or '--firefox' to build a specific browser extension");
-    console.log("Use '--firefox --sign' to create a signed Firefox extension");
     console.log("Use '--system' to use system utilities for zipping");
 }
 

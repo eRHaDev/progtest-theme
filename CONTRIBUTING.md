@@ -34,4 +34,4 @@ Run `bun version` to bump the version in `package.json` and `manifest.json`.
 
 Run `bun build:chrome` to build the extension for Chrome.
 
-Run `bun sign:firefox` to build the extension for Firefox. Don't forget to set `WEB_EXT_API_KEY` and `WEB_EXT_API_SECRET` in `.env`!
+Run `bun build:firefox` to build the extension for Firefox. Don't forget to set `WEB_EXT_API_KEY` and `WEB_EXT_API_SECRET` in `.env`!
