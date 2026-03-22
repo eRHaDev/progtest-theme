@@ -10,7 +10,7 @@ export async function build(options: { verbose: boolean; clean: boolean }) {
     }
 
     try {
-        await mkdir(BUILD_DIR);
+        await mkdir(BUILD_DIR, { recursive: true });
     } catch (e) {
         if ((e as ErrnoException)?.code !== "EEXIST") {
             console.error(e);

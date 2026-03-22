@@ -10,8 +10,8 @@ const FIREFOX_DIST_DIR = `${OUT_DIR}/firefox` as const;
 const CHROME_DIST_DIR = `${OUT_DIR}/chrome` as const;
 
 async function pack(distDir: string, useSystemUtilities: boolean) {
-    await rm(distDir, { recursive: true });
-    await mkdir(distDir);
+    await rm(distDir, { recursive: true, force: true });
+    await mkdir(distDir, { recursive: true });
     await zipDirectory(BUILD_DIR, `${distDir}/progtest_themes.zip`, {
         useSystemUtilities
     });
@@ -23,8 +23,8 @@ async function signFirefox() {
     }
 
     await cp(FIREFOX_MANIFEST, MANIFEST_TARGET);
-    await rm(FIREFOX_DIST_DIR, { recursive: true });
-    await mkdir(FIREFOX_DIST_DIR);
+    await rm(FIREFOX_DIST_DIR, { recursive: true, force: true });
+    await mkdir(FIREFOX_DIST_DIR, { recursive: true });
     await webExt.cmd.sign(
         {
             sourceDir: BUILD_DIR,
